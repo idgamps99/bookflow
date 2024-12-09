@@ -10,9 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_09_140106) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_09_142653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.integer "year_published"
+    t.text "summary"
+    t.string "genre"
+    t.string "author"
+    t.integer "page_count"
+    t.integer "overall_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reading_lists", force: :cascade do |t|
+    t.boolean "active", default: true
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_reading_lists_on_book_id"
+    t.index ["user_id"], name: "index_reading_lists_on_user_id"
+  end
+
+  create_table "reading_sessions", force: :cascade do |t|
+    t.time "session_start"
+    t.time "session_end"
+    t.integer "duration"
+    t.bigint "tracker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tracker_id"], name: "index_reading_sessions_on_tracker_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.float "rating"
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "trackers", force: :cascade do |t|
+    t.integer "current_page"
+    t.integer "total_minutes_spent"
+    t.string "reading_status"
+    t.bigint "reading_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reading_list_id"], name: "index_trackers_on_reading_list_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +76,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_09_140106) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reading_lists", "books"
+  add_foreign_key "reading_lists", "users"
+  add_foreign_key "reading_sessions", "trackers"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "trackers", "reading_lists"
 end
