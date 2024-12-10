@@ -2,11 +2,13 @@
 
 <% if params[:genre_query].present? %>
     <% @books.each do |book| %>
-      <<%= image_tag book.cover_url %>
+      <%= image_tag book.cover_url %>
+      <%= book.key %>
   <% end %>
 
 <% elsif params[:query].present? %>
   <% @books.each do |book| %>
     <%= image_tag book.cover_url %>
+    <%= link_to "Details", book_path(book.key) %>
   <% end %>
 <% end %>
