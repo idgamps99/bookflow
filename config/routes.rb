@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :books, only: [:index, :show]
+  get 'discover', to: 'discover#index', as: 'discover'
+
+  resources :books, only: [:index, :show], param: :genre
 end
