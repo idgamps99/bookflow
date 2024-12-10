@@ -1,10 +1,10 @@
-<%= content_for :title, "Discover Books" %>
+<%= content_for :title, "Discover" %>
 
 <div class="discover-container">
 
   <div class="search-bar">
-    <%= form_with url: discover_path, method: :get, local: true do |f| %>
-      <%= f.text_field :search, placeholder: "Search for a book..." %>
+    <%= form_with url: books_path, method: :get, local: true do |f| %>
+      <%= f.text_field :search, placeholder: "Search for a book...", value: params[:search] %>
       <%= f.submit "Search" %>
     <% end %>
   </div>
@@ -23,7 +23,6 @@
     <div class="books">
       <% @recommended_books.each do |book| %>
         <div class="book-card">
-          <%= image_tag book.cover_image_url, alt: book.title, class: "book-cover" %>
           <h4><%= book.title %></h4>
           <p><%= book.author %></p>
           <p><%= book.overall_rating %> ★</p>
@@ -37,7 +36,6 @@
     <div class="books">
       <% @top_picks.each do |book| %>
         <div class="book-card">
-          <%= image_tag book.cover_image_url, alt: book.title, class: "book-cover" %>
           <h4><%= book.title %></h4>
           <p><%= book.author %></p>
           <p><%= book.overall_rating %> ★</p>

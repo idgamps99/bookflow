@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   get 'discover', to: 'discover#index', as: 'discover'
 
-  resources :books, only: [:index, :show], param: :genre
+  resources :books, only: [:index, :show]
 end

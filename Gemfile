@@ -51,6 +51,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'faker'
+gem 'pg_search'
 
 group :development, :test do
   gem "dotenv-rails"
@@ -74,9 +75,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-# 1st seed round
-gem 'faker'
-
-# Search ability
-gem "pg_search"
