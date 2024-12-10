@@ -4,8 +4,9 @@ require "open-uri"
 class BooksController < ApplicationController
 
   def index
-    # TODO: There's an error when there are no search queries.
+    # TODO: There's an error when there are no search queries
     # Seeds don't currently have a key, so the helper can't build a path to the display page oops
+    # The API call also doesn't return any ratings. Unsure what to do with that atm
     @books = Book.all
 
     # TODO: Enable multiple search queries
