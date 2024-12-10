@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :books, only: [:index, :show] do
     resources :reading_lists, only: [:create]
+
   end
 
 end

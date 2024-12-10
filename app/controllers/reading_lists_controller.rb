@@ -3,10 +3,20 @@ class ReadingListsController < ApplicationController
 
   def index
     @reading_lists = ReadingList.where(active: true)
+    @reading_lists_done = ReadingList.where(active: false)
   end
 
   def show
   end
+
+  # def check_list_exists
+  #   @reading_list = ReadingList.find_by(user: current_user, book: Book.find(params[:book_id]))
+  #   if @reading_list
+  #     deactivate()
+  #   else
+  #     create()
+  #   end
+  # end
 
   def create
     @user = current_user
@@ -22,8 +32,8 @@ class ReadingListsController < ApplicationController
   end
 
   def deactivate
-    @reading_list.active = false
-    if @reading_list.save!
+    @reading_list.active = !@reading_list.active
+    if @reading_list.save
       redirect_to reading_lists_path
     else
       render :show, status: :unprocessable_entity
