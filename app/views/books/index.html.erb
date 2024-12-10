@@ -1,5 +1,12 @@
 <%= render "shared/searchbar" %>
 
+<% if params[:genre].present? %>
+  <div class="filter">
+    <p>Showing books in genre: <%= params[:genre].capitalize %></p>
+    <%= link_to "Clear Filter", books_path, class: "clear-filter" %>
+  </div>
+<% end %>
+
 <% if params[:query].present? %>
 <ul>
   <% @books.each do |book| %>

@@ -8,3 +8,5 @@ class User < ApplicationRecord
   has_many :reading_lists
   validates :username, :email, presence: true, uniqueness: true
 end
+
+# hello
