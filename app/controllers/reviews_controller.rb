@@ -15,6 +15,26 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @book = Book.find(params[:book_id])
+    @review = @book.reviews.find(params[:id])
+  end
+
+  def update
+    @review = @book.reviews.find(params[:id])
+    if @review.update(review_params)
+      redirect_to @book, notice: 'Review updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @review = @book.reviews.find(params[:id])
+    @review.destroy
+    redirect_to @book, notice: 'Review deleted.'
+  end
+
   private
 
   def set_book
@@ -22,6 +42,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:content, :rating)
+    params.require(:review).permit(:content, :rating, :title)
   end
 end
