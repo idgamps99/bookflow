@@ -75,5 +75,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
-
+# 1st seed round
 gem 'faker'
+
+# Search ability
+gem "pg_search"
