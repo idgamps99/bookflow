@@ -9,4 +9,25 @@
 
 
 <p>tracker</p>
-<%= link_to "start Tracker", reading_list_trackers_path(@reading_list), data: { turbo_method: :post } %>
+<% if @tracker.blank? %>
+  <p>Not tracked yet</p>
+<% else %>
+  <%= @tracker.current_page %>
+
+  <%= link_to "Start a new Session", tracker_reading_sessions_path(@tracker), data: { turbo_method: :post } %>
+
+  <ul>
+    <% @reading_session.each do |read| %>
+      <li>
+      <%= read.session_start %>
+      <%= link_to "End Session", tracker_reading_session_path(tracker_id: @tracker, id: read), data: { turbo_method: :patch } %>
+      </li>
+    <% end %>
+  </ul>
+
+
+
+<% end %>
+
+
+<%= link_to "start Tracker", tracker_reading_sessions_path(@reading_list), data: { turbo_method: :post } %>

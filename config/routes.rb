@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :reading_lists, only: [:create]
   end
 
-  resources :trackers, only: [:show, :update]
+  resources :trackers, only: [:show, :update] do
+    resources :reading_sessions, only: [:new, :create, :edit, :update]
+  end
 
+  # resources :reading_sessions, only: [:edit, :update]
 end

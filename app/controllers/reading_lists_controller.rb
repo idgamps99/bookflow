@@ -7,6 +7,8 @@ class ReadingListsController < ApplicationController
   end
 
   def show
+    @tracker = Tracker.find_by(reading_list_id: @reading_list)
+    @reading_session = ReadingSession.where(tracker_id: @tracker)
   end
 
   def create
