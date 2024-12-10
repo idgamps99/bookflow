@@ -1,0 +1,9 @@
+<%= render "shared/searchbar" %>
+<div class="container">
+  <ul>
+    <% @books.each do |book| %>
+      <li><%= book.title %>  | <em><%= book.author %></em>  |  <strong><%= book.genre %></strong></li>
+    <% end %>
+  </ul>
+
+</div>
