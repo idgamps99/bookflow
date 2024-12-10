@@ -1,14 +1,14 @@
 <%= render "shared/searchbar" %>
 
-<% if params[:genre_query].present? %>
+<% if params[:query].present? %>
     <% @books.each do |book| %>
-      <%= image_tag book.cover_url %>
-      <%= book.key %>
-  <% end %>
+    
+      <%= image_tag book.cover_url, alt: "Book Cover" unless book.cover_url.nil? %>
+    <% end %>
+<% end %>
 
-<% elsif params[:query].present? %>
+<% if params{:genre_query}.present? %>
   <% @books.each do |book| %>
-    <%= image_tag book.cover_url %>
-    <%= link_to "Details", book_path(book.key) %>
+    <%= image_tag book.cover_url, alt: "Book Cover" unless book.cover_url.nil? %>
   <% end %>
 <% end %>
