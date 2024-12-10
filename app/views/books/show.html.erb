@@ -1,9 +1,9 @@
 <h1><%= @book.title %></h1>
-
+<%= image_tag @book.cover_url, alt: @book.title %>
 <p><strong>Author:</strong> <%= @book.author %></p>
 <p><strong>Published Year:</strong> <%= @book.year_published %></p>
 <p><strong>Genre:</strong> <%= @book.genre %></p>
 <p><strong>Page Count:</strong> <%= @book.page_count %> pages</p>
-<p><strong>Overall Rating:</strong> <%= @book.overall_rating %>/10</p>
+<p><strong>Overall Rating:</strong> <%= number_with_precision @book.overall_rating, precision: 1 %>/5.0</p>
 <p><strong>Summary:</strong></p>
 <p><%= @book.summary %></p>
