@@ -1,8 +1,11 @@
 class ReadingListsController < ApplicationController
-  before_action :deactivate
+  before_action :set_reading_list, only: [:show, :deactivate]
 
   def index
     @reading_lists = ReadingList.where(active: true)
+  end
+
+  def show
   end
 
   def create
@@ -16,6 +19,11 @@ class ReadingListsController < ApplicationController
 
   def deactivate
     @reading_list.active = false
+    if @reading_list.save!
+      redirect_to reading_lists_path
+    else
+      render :show, status: :unprocessable_entity
+    end
   end
 
   private

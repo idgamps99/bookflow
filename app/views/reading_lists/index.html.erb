@@ -5,7 +5,7 @@
 <% else %>
   <ul>
     <% @reading_lists.each do |reading_list| %>
-      <li><%= reading_list.book.title  %></li>
+      <li><%= reading_list.book.title  %> <%= link_to "show", reading_list_path(reading_list) %></li>
     <% end %>
   </ul>
 <% end %>
