@@ -7,9 +7,13 @@ class TrackersController < ApplicationController
     if @tracker.save
       redirect_to reading_list_path(@reading_list), notice: "Tracker successfully created."
     else
-      render :new, alert: "Tracker could not be created."
+      redirect_to reading_list_path(@reading_list), alert: "Tracker could not be created."
     end
   end
+
+  # def update
+  #   @tracker = Tracker.find(params[:id])
+  # end
 
   private
 
