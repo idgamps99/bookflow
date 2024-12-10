@@ -39,12 +39,14 @@ class BooksController < ApplicationController
   end
 
   def title_search(query)
-    url = "https://www.googleapis.com/books/v1/volumes?q=#{(query)}&startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
+    url = "https://www.googleapis.com/books/v1/volumes?q=#{(query)}
+            &startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
     books = base_search(query, url)
   end
 
   def genre_search(query)
-    url = "https://www.googleapis.com/books/v1/volumes?q=subject:#{query}&startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
+    url = "https://www.googleapis.com/books/v1/volumes?q=subject:#{query}
+            &startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
     books = base_search(query, url)
   end
 
