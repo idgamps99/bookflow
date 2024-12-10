@@ -9,15 +9,6 @@ class ReadingListsController < ApplicationController
   def show
   end
 
-  # def check_list_exists
-  #   @reading_list = ReadingList.find_by(user: current_user, book: Book.find(params[:book_id]))
-  #   if @reading_list
-  #     deactivate()
-  #   else
-  #     create()
-  #   end
-  # end
-
   def create
     @user = current_user
     @book = Book.find(params[:book_id])
@@ -27,17 +18,17 @@ class ReadingListsController < ApplicationController
     if @reading_list.save
       redirect_to reading_lists_path, notice: "Book successfully added to your reading list."
     else
-      render :new, status: :unprocessable_entity
+      @reading_list = ReadingList.find_by(user: current_user, book: params[:book_id])
+      @reading_list.active = true
+      @reading_list.save
+      redirect_to reading_lists_path, alert: "Book has been reactivated."
     end
   end
 
   def deactivate
-    @reading_list.active = !@reading_list.active
-    if @reading_list.save
-      redirect_to reading_lists_path
-    else
-      render :show, status: :unprocessable_entity
-    end
+    @reading_list.active = false
+    @reading_list.save
+    redirect_to reading_lists_path, notice: "Book successfully removed from your reading list."
   end
 
   private

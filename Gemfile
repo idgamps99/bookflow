@@ -74,5 +74,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "faker"
+
 # Search ability
 gem "pg_search"
