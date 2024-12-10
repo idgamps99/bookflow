@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_10_115159) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_10_145009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,9 +60,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_10_115159) do
   end
 
   create_table "trackers", force: :cascade do |t|
-    t.integer "current_page"
-    t.integer "total_minutes_spent"
-    t.string "reading_status"
+    t.integer "current_page", default: 0
+    t.integer "total_minutes_spent", default: 0
+    t.string "reading_status", default: "Started tracking"
     t.bigint "reading_list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
