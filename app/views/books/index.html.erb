@@ -1,6 +1,6 @@
 <%= render "shared/searchbar" %>
 <ul>
   <% @books.each do |book| %>
-    <li> <%= link_to book.title, book_path(book) %>  | <em><%= book.author %></em>  |  <strong><%= book.genre %></strong></li>
+    <li> <%= image_tag book.cover_url, alt: book.title %> <%= link_to book.title, book_path(book) %>  | <em><%= book.author %></em>  |  <strong><%= book.genre %></strong></li>
   <% end %>
 </ul>

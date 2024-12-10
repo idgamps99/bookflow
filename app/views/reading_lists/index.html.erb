@@ -1,0 +1,20 @@
+<h2>Library</h2>
+
+<% if @reading_lists.empty? %>
+  <p>There are no Books yet.</p>
+<% else %>
+  <ul>
+    <% @reading_lists.each do |reading_list| %>
+      <li><%= reading_list.book.title  %> <%= link_to "show", reading_list_path(reading_list) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to "Back", books_path %>
+
+<h2>Books Read</h2>
+<ul>
+  <% @reading_lists_done.each do |done| %>
+    <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
+  <% end %>
+</ul>

@@ -12,4 +12,12 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show] do
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
+  resources :reading_lists, only: [:index, :show]
+
+  patch "/reading_lists/:id", to: "reading_lists#deactivate", as: :deactivate
+
+  resources :books, only: [:index, :show] do
+    resources :reading_lists, only: [:create]
+
+  end
 end
