@@ -50,11 +50,8 @@ gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
-<<<<<<< HEAD
 gem 'faker'
 gem 'pg_search'
-=======
->>>>>>> master
 
 group :development, :test do
   gem "dotenv-rails"
@@ -78,11 +75,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-<<<<<<< HEAD
-=======
-
-gem "faker"
-
-# Search ability
-gem "pg_search"
->>>>>>> master
