@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  get 'discover', to: 'discover#index', as: 'discover'
   resources :reading_lists, only: [:index, :show]
 
   patch "/reading_lists/:id", to: "reading_lists#deactivate", as: :deactivate
