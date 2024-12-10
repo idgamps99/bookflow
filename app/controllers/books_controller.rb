@@ -4,7 +4,8 @@ require "open-uri"
 class BooksController < ApplicationController
 
   def index
-    # if no search queries
+    # TODO: There's an error when there are no search queries.
+    # Seeds don't currently have a key, so the helper can't build a path to the display page oops
     @books = Book.all
 
     # TODO: Enable multiple search queries
@@ -38,18 +39,21 @@ class BooksController < ApplicationController
     )
   end
 
+  # or this
   def title_search(query)
     url = "https://www.googleapis.com/books/v1/volumes?q=#{(query)}
             &startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
     books = base_search(query, url)
   end
 
+  # and this
   def genre_search(query)
     url = "https://www.googleapis.com/books/v1/volumes?q=subject:#{query}
             &startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
     books = base_search(query, url)
   end
 
+  # and especially this
   def base_search(query, url)
     books = []
     response = URI.parse(url).read

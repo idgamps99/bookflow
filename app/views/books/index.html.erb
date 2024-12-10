@@ -1,16 +1,9 @@
 <%= render "shared/searchbar" %>
 
-<% if params[:query].present? %>
+<% if params[:query].present? || params{:genre_query}.present? %>
     <% @books.each do |book| %>
       <%= link_to book_path(book.key) do %>
-        <%= image_tag book.cover_url, alt: "Book Cover" unless book.cover_url.nil? %>
-      <% end %>
-    <% end %>
-<% end %>
-
-<% if params{:genre_query}.present? %>
-  <% @books.each do |book| %>
-      <%= link_to book_path(book.key) do %>
+        <%# the unless statement prevents error: not every result has a cover %>
         <%= image_tag book.cover_url, alt: "Book Cover" unless book.cover_url.nil? %>
       <% end %>
     <% end %>
