@@ -1,13 +1,7 @@
-<%= @book.title %>
-<%= @book.author %>
-
-<% if params[:query].present? %>
 <ul>
-  <% @books.each do |book|  %>
-    <li>Title: <%= book["title"] %></li>
-    <li>Author: <%= book["authors"] %> </li>
-    <li>Year Published <%= book["publishedDate"] %> </li>
-    <li>Description: <%= book["description"] %> </li>
-  <% end %>
+  <li>Title: <%= @book.title %></li>
+  <li>Author: <%= @book.author %></li>
+  <li>Year Published: <%= @book.year_published %></li>
+  <li>Page Count: <%= @book.page_count %></li>
+  <li>Summary: <%= @book.summary %></li>
 </ul>
-<% end %>
