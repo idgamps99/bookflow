@@ -1,10 +1,10 @@
 class Book < ApplicationRecord
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :reading_lists, dependent: :destroy
 
   include PgSearch::Model
-  pg_search_scope :search_by_title_and_summary,
-    against: [ :title, :summary ],
+  pg_search_scope :search_by_title,
+    against: [ :title ],
     using: {
       tsearch: { prefix: true }
     }
