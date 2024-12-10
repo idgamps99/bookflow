@@ -7,3 +7,13 @@
 <p><strong>Overall Rating:</strong> <%= @book.overall_rating %>/10</p>
 <p><strong>Summary:</strong></p>
 <p><%= @book.summary %></p>
+
+<h3>Reviews</h3>
+
+<% @book.reviews.each do |review| %>
+  <p><strong><%= review.user.username %>:</strong></p>
+  <p><%= review.content %>:</p>
+  <p>Rating: <%= review.rating %></p>
+<% end %>
+
+<%= link_to "Leave a review", new_book_review_path(@book) %>

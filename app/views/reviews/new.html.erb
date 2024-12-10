@@ -1,6 +1,6 @@
 <h2>Leave a review for <%= @book.title %>  </h2>
 <%= simple_form_for ([@book, @review]) do |f| %>
-  <%= f.input :title, label: "Your review" %>
+  <%= f.input :title, label: "Title" %>
   <%= f.input :content %>
   <%= f.input :rating, label: "Rating 0-5" %>
   <%= f.button :submit, label: "Submit review" %>

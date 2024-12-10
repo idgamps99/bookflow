@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
       redirect_to @book, notice: 'Review created.'
     else
       render 'books/show', status: :unprocessable_entity
+    end
   end
 
   private
