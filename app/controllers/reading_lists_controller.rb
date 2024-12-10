@@ -9,9 +9,13 @@ class ReadingListsController < ApplicationController
   end
 
   def create
-    @reading_list = ReadingList.new(reading_list_params)
+    @user = current_user
+    @book = Book.find(params[:book_id])
+    @reading_list = ReadingList.new()
+    @reading_list.user = @user
+    @reading_list.book = @book
     if @reading_list.save
-      redirect_to reading_lists_path
+      redirect_to reading_lists_path, notice: "Book successfully added to your reading list."
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,10 +31,6 @@ class ReadingListsController < ApplicationController
   end
 
   private
-
-  def reading_list_params
-    params.require(:reading_list).permit(:user_id, :book_id, :active)
-  end
 
   def set_reading_list
     @reading_list = ReadingList.find(params[:id])

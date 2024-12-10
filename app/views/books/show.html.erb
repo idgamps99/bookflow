@@ -7,3 +7,5 @@
 <p><strong>Overall Rating:</strong> <%= @book.overall_rating %>/10</p>
 <p><strong>Summary:</strong></p>
 <p><%= @book.summary %></p>
+
+<%= link_to "Add",  book_reading_lists_path(@book), data: { turbo_method: :post, confirm: "Are you sure?" }%>
