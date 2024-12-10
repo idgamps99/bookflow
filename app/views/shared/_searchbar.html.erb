@@ -7,9 +7,9 @@
             placeholder: "Type a keyword"
         %>
       <%= select_tag :genre_query,
-      # this will probably cause issues until we have some better seeds - these categories were based on what I have 
-          options_for_select(["Spirituality", "Mythopoeia", "Fantasy", "Crime/Detective", "Classic", "Mystery", "Short story",
-                "Textbook", "Comic/Graphic Novel", "Short story", "Science fiction", "Fiction narrative", "Metafiction"],
+      # will have to add more categories here at some point 
+          options_for_select(["Dystopian", "Romance", "Southern Gothic", "Tragedy", "Adventure", "Coming-of-Age", "Fantasy",
+                              "Science Fiction", "Crime", "Gothic Fiction" "Epic Poetry"],
           params[:genre_query]),
           class: "form-control",
           include_blank: "Genre"

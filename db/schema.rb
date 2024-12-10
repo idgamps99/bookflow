@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_09_142653) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_10_115159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,9 +21,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_09_142653) do
     t.string "genre"
     t.string "author"
     t.integer "page_count"
-    t.integer "overall_rating"
+    t.float "overall_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cover_url"
   end
 
   create_table "reading_lists", force: :cascade do |t|
