@@ -2,8 +2,8 @@ class ReadingListsController < ApplicationController
   before_action :set_reading_list, only: [:show, :deactivate]
 
   def index
-    @reading_lists = ReadingList.where(active: true)
-    @reading_lists_done = ReadingList.where(active: false)
+    @reading_lists = ReadingList.where(active: true, user_id: current_user)
+    @reading_lists_done = ReadingList.where(active: false, user_id: current_user)
   end
 
   def show

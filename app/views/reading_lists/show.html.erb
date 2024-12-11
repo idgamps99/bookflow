@@ -19,9 +19,12 @@
   <% if @reading_session.present? && @reading_session.active %>
     <p>Session is still ongoing</p>
     <%= @reading_session.session_start %>
-    <%= button_to "End Session", tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch, data: { turbo_method: :patch } %>
+    <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
+      <%= form.number_field :page_count %>
+      <%= form.submit "End Session" %>
+    <% end %>
   <% else %>
-    <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post %>
+    <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }%>
   <% end %>
 
 

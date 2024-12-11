@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_11_111218) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_11_164115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_11_111218) do
     t.datetime "session_start"
     t.datetime "session_end"
     t.boolean "active", default: true
+    t.integer "page_count", default: 0
     t.index ["tracker_id"], name: "index_reading_sessions_on_tracker_id"
   end
 
