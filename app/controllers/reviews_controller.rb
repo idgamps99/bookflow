@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    p @book
     @review = @book.reviews.new(review_params)
     @review.user = current_user
     if @review.save
@@ -39,7 +38,7 @@ class ReviewsController < ApplicationController
   private
 
   def set_book
-    @book = Book.find_by(key: params[:book_key])
+    @book = Book.find(params[:book_key])
   end
 
   def review_params

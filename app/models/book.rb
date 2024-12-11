@@ -2,6 +2,10 @@ class Book < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :reading_lists, dependent: :destroy
 
+  def to_param
+    key
+  end
+
   include PgSearch::Model
   pg_search_scope :search_by_title,
     against: [ :title ],

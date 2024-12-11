@@ -18,6 +18,7 @@ class BooksController < ApplicationController
   def show
     @review = Review.new
     # Return instance of book if already in DB, else create a new instance for that book
+    raise
     if @book = Book.find_by(key: params[:key])
       @book
     else
@@ -28,7 +29,7 @@ class BooksController < ApplicationController
   private
 
   # Here be dragons. Pls don't touch this or i will cry, ta
-  # TODO: still don't have a rating when you create a new book 
+  # TODO: still don't have a rating when you create a new book
   def show_page_search(key)
     url = "https://www.googleapis.com/books/v1/volumes/#{key}?key=#{ENV['GOOGLE_API_KEY']}"
     response = URI.parse(url).read
@@ -44,21 +45,18 @@ class BooksController < ApplicationController
     )
   end
 
-  # or this
   def title_search(query)
     url = "https://www.googleapis.com/books/v1/volumes?q=#{(query)}
             &startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
     books = base_search(query, url)
   end
 
-  # and this
   def genre_search(query)
     url = "https://www.googleapis.com/books/v1/volumes?q=subject:#{query}
             &startIndex=0&maxResults=40&key=#{ENV["GOOGLE_API_KEY"]}"
     books = base_search(query, url)
   end
 
-  # and especially this
   def base_search(query, url)
     books = []
     response = URI.parse(url).read
