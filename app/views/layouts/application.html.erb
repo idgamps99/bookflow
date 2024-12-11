@@ -8,11 +8,16 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+  <body>
+    <%= render "shared/navbar" %> <!-- This will render the shared navbar -->
+    <%= render "shared/flashes" %>
 
     <%= yield %>
+
+    <!-- Render the bottom navbar as a partial -->
+    <%= render "shared/bottom_navbar" %> <!-- This refers to the _bottom_navbar.html.erb partial -->
   </body>
 </html>
