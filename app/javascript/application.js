@@ -3,6 +3,7 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+import "../bottom_navbar";
 
 // Pop-up form
 // function toggleReviewForm() {
