@@ -4,8 +4,6 @@ require "open-uri"
 class BooksController < ApplicationController
 
   def index
-    # TODO: There's an error when there are no search queries
-    # Seeds don't currently have a key, so the helper can't build a path to the display page oops
     # The API call also doesn't return any ratings. Unsure what to do with that atm
     @books = Book.all
 
@@ -20,7 +18,11 @@ class BooksController < ApplicationController
   def show
     # TODO: CHECK IF BOOK IS IN DB OR NOT BEFORE MAKING API CALL!
     @review = Review.new
-    @book = show_page_search(params[:key])
+    if @book = Book.find_by(key: params[:key])
+      @book
+    else
+      @book = show_page_search(params[:key])
+    end
   end
 
   private
