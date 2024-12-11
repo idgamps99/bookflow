@@ -11,23 +11,18 @@
 <p>tracker</p>
 <% if @tracker.blank? %>
   <p>Not tracked yet</p>
+  <%= link_to "start Tracker", reading_list_trackers_path(@reading_list), data: { turbo_method: :post } %>
 <% else %>
   <%= @tracker.current_page %>
 
-  <%= link_to "Start a new Session", tracker_reading_sessions_path(@tracker), data: { turbo_method: :post } %>
 
-  <ul>
-    <% @reading_session.each do |read| %>
-      <li>
-      <%= read.session_start %>
-      <%= link_to "End Session", tracker_reading_session_path(tracker_id: @tracker, id: read), data: { turbo_method: :patch } %>
-      </li>
-    <% end %>
-  </ul>
-
+  <% if @reading_session.present? && @reading_session.active %>
+    <p>Session is still ongoing</p>
+    <%= @reading_session.session_start %>
+    <%= link_to "End Session", tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), data: { turbo_method: :patch } %>
+  <% else %>
+    <%= link_to "Start a new Session", tracker_reading_sessions_path(@tracker), data: { turbo_method: :post } %>
+  <% end %>
 
 
 <% end %>
-
-
-<%= link_to "start Tracker", tracker_reading_sessions_path(@reading_list), data: { turbo_method: :post } %>

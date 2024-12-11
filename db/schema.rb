@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_10_145009) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_11_111218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,12 +38,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_10_145009) do
   end
 
   create_table "reading_sessions", force: :cascade do |t|
-    t.time "session_start"
-    t.time "session_end"
     t.integer "duration"
     t.bigint "tracker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "session_start"
+    t.datetime "session_end"
+    t.boolean "active", default: true
     t.index ["tracker_id"], name: "index_reading_sessions_on_tracker_id"
   end
 
