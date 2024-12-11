@@ -32,13 +32,14 @@ class BooksController < ApplicationController
     url = "https://www.googleapis.com/books/v1/volumes/#{key}?key=#{ENV['GOOGLE_API_KEY']}"
     response = URI.parse(url).read
     data = JSON.parse(response)
-    Book.new(
+    Book.create!(
       title: data["volumeInfo"]["title"],
+      author: data["volumeInfo"]["authors"][0],
       year_published: data["volumeInfo"]["publishedDate"],
       summary: data["volumeInfo"]["description"],
-      author: data["volumeInfo"]["authors"][0],
       page_count: data["volumeInfo"]["pageCount"],
-      cover_url: data["volumeInfo"]["imageLinks"]&.dig("smallThumbnail")
+      cover_url: data["volumeInfo"]["imageLinks"]&.dig("smallThumbnail"),
+      key: key
     )
   end
 
