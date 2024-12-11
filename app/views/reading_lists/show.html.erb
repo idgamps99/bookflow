@@ -3,9 +3,26 @@
 
 <%= @reading_list.book.title %>
 
-<%= link_to "delete", deactivate_path(@reading_list), data: { turbo_method: :patch, confirm: "Are you sure?" } %>
+<%= button_to "delete", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
 
 <%= link_to "Back", reading_lists_path %>
 
 
 <p>tracker</p>
+<% if @tracker.blank? %>
+  <p>Not tracked yet</p>
+  <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
+<% else %>
+  <%= @tracker.current_page %>
+
+
+  <% if @reading_session.present? && @reading_session.active %>
+    <p>Session is still ongoing</p>
+    <%= @reading_session.session_start %>
+    <%= button_to "End Session", tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch, data: { turbo_method: :patch } %>
+  <% else %>
+    <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post %>
+  <% end %>
+
+
+<% end %>
