@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :books, only: [:index, :show] do
+    resources :reviews, only: [:new, :create, :edit, :update, :destroy]
+  end
   get 'discover', to: 'discover#index', as: 'discover'
   resources :reading_lists, only: [:index, :show]
 
@@ -18,5 +21,4 @@ Rails.application.routes.draw do
     resources :reading_lists, only: [:create]
 
   end
-
 end
