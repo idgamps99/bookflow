@@ -13,7 +13,7 @@
     <h3>Genres</h3>
     <div class="genre-buttons">
       <% @genres.each do |genre| %>
-        <%= link_to genre.genre, books_path(genre: genre.genre), class: "genre-button" %>
+        <%= link_to genre.genre, books_path(genre_query: genre.genre), class: "genre-button" %>
       <% end %>
     </div>
   </div>

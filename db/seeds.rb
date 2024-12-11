@@ -103,7 +103,7 @@ books = [
 ]
 
 puts "Seeding books..."
-
+# There are some issues with this. It won't seed all of them 
 for i in 0...books.length do
   if !Book.exists?(title: books[i][0])
     url = "https://www.googleapis.com/books/v1/volumes?q=#{(books[i][0])}&key=#{ENV["GOOGLE_API_KEY"]}"

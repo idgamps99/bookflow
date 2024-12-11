@@ -16,7 +16,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    # TODO: CHECK IF BOOK IS IN DB OR NOT BEFORE MAKING API CALL!
     @review = Review.new
     if @book = Book.find_by(key: params[:key])
       @book
