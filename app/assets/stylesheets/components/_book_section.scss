@@ -1,0 +1,39 @@
+.book-section {
+margin-left: 10px;
+margin-right: 10px;
+margin-top: 20px;
+}
+
+.book-section h3 {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.books {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.book-card {
+  text-align: center;
+  width: 150px;
+}
+
+.book-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-card h4 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+.book-card p {
+  font-size: 14px;
+  color: #555;
+}
