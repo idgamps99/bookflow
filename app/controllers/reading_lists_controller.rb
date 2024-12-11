@@ -11,14 +11,14 @@ class ReadingListsController < ApplicationController
 
   def create
     @user = current_user
-    @book = Book.find(params[:book_id])
-    @reading_list = ReadingList.new()
+    @book = Book.find_by(params[:key])
+    @reading_list = ReadingList.new
     @reading_list.user = @user
     @reading_list.book = @book
     if @reading_list.save
       redirect_to reading_lists_path, notice: "Book successfully added to your reading list."
     else
-      @reading_list = ReadingList.find_by(user: current_user, book: params[:book_id])
+      @reading_list = ReadingList.find_by(user: current_user, book: params[:key])
       @reading_list.active = true
       @reading_list.save
       redirect_to reading_lists_path, alert: "Book has been reactivated."
@@ -34,6 +34,6 @@ class ReadingListsController < ApplicationController
   private
 
   def set_reading_list
-    @reading_list = ReadingList.find(params[:id])
+    @reading_list = ReadingList.find(params[:key])
   end
 end

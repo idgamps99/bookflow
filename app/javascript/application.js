@@ -3,10 +3,3 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
-import "../bottom_navbar";
-
-// Pop-up form
-// function toggleReviewForm() {
-//   const form = document.getElementById("review-form");
-//   form.style.display = form.style.display === "none" ? "block" : "none";
-// }

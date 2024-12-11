@@ -4,10 +4,10 @@ require "open-uri"
 class BooksController < ApplicationController
 
   def index
-    # The API call also doesn't return any ratings. Unsure what to do with that atm
+    # If no API call
     @books = Book.all
 
-    # TODO: Enable multiple search queries
+    # If search queries are present, call API
     if params[:query].present?
       @books = title_search(params[:query])
     elsif params[:genre_query].present?
@@ -17,6 +17,7 @@ class BooksController < ApplicationController
 
   def show
     @review = Review.new
+    # Return instance of book if already in DB, else create a new instance for that book
     if @book = Book.find_by(key: params[:key])
       @book
     else
@@ -27,6 +28,7 @@ class BooksController < ApplicationController
   private
 
   # Here be dragons. Pls don't touch this or i will cry, ta
+  # TODO: still don't have a rating when you create a new book 
   def show_page_search(key)
     url = "https://www.googleapis.com/books/v1/volumes/#{key}?key=#{ENV['GOOGLE_API_KEY']}"
     response = URI.parse(url).read
