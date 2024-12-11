@@ -38,7 +38,7 @@ class ReviewsController < ApplicationController
   private
 
   def set_book
-    @book = Book.find(params[:book_key])
+    @book = Book.find_by(key: params[:book_key])
   end
 
   def review_params

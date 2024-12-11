@@ -12,13 +12,12 @@ class BooksController < ApplicationController
       @books = title_search(params[:query])
     elsif params[:genre_query].present?
       @books = genre_search(params[:genre_query])
-    end
+  end
   end
 
   def show
     @review = Review.new
     # Return instance of book if already in DB, else create a new instance for that book
-    raise
     if @book = Book.find_by(key: params[:key])
       @book
     else
