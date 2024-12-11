@@ -13,12 +13,19 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
   get 'discover', to: 'discover#index', as: 'discover'
-  resources :reading_lists, only: [:index, :show]
+  resources :reading_lists, only: [:index, :show] do
+    resources :trackers, only: [:new, :create]
+  end
 
   patch "/reading_lists/:id", to: "reading_lists#deactivate", as: :deactivate
 
   resources :books, only: [:index, :show] do
     resources :reading_lists, only: [:create]
-
   end
+
+  resources :trackers, only: [:show, :update] do
+    resources :reading_sessions, only: [:new, :create, :edit, :update]
+  end
+
+  # resources :reading_sessions, only: [:edit, :update]
 end

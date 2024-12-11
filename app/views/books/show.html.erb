@@ -49,4 +49,4 @@
     <%= link_to "Delete", book_review_path(@book, review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <% end %>
 <% end %>
-<%= link_to "Add",  book_reading_lists_path(@book), data: { turbo_method: :post, confirm: "Are you sure?" }%>
+<%= button_to "Add", book_reading_lists_path(@book), method: :post %>
