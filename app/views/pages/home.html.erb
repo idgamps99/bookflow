@@ -2,13 +2,7 @@
 
 <div class="discover-container">
 
-  <div class="search-bar">
-    <%= form_with url: books_path(params[:query]), method: :get, local: true, html: { autocomplete: "off" }, class: "search-form" do |f| %>
-      <i class="fa-solid fa-magnifying-glass" style="color: #b8b8b8;"></i>
-      <%= f.text_field :query, placeholder: "Search for a book", value: params[:query], class: "search-field" %>
-      <%= f.submit "Search", class: "hidden-button" %>
-    <% end %>
-  </div>
+  <%= render "shared/search_bar" %>
 
   <div class="main-banner-container">
     <div class="main-banner">
