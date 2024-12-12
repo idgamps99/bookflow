@@ -48,14 +48,13 @@
   font-weight: bold;
 }
 
-/* Home indicator (iPhone-like) */
 .home-indicator {
   width: 180px;
   height: 5px;
   border-radius: 50px;
   background-color: #333;
   margin: 5px auto 10px auto;
-  position: fixed; /* Use fixed to ensure it's always at the bottom */
+  position: fixed;
   bottom: 0;
-  z-index: 1000; /* Ensure it's above other content */
+  z-index: 1000;
 }
