@@ -44,7 +44,7 @@ class ReadingSessionsController < ApplicationController
   before_action :set_tracker
 
   def create
-    @reading_session = ReadingSession.new(session_start: Date.current, tracker: @tracker)
+    @reading_session = ReadingSession.new(session_start: Time.current, tracker: @tracker)
 
     if @reading_session.save
       # Log the session_start and redirect to the reading list
@@ -55,16 +55,24 @@ class ReadingSessionsController < ApplicationController
   end
 
   def update
-    @reading_session = ReadingSession.find_by(tracker_id: @tracker, active: true)
+    @reading_session = ReadingSession.find_by(tracker_id: @tracker.id, active: true)
 
     if @reading_session
+      # Use strong parameters to set page_count
+      if reading_session_params[:page_count].present?
+        @reading_session.page_count = reading_session_params[:page_count]
+      end
       # Set session_end and calculate duration
-      @reading_session.session_end = Date.current
+      @reading_session.session_end = Time.current
       @reading_session.duration = (@reading_session.session_end.to_time - @reading_session.session_start.to_time)
       @reading_session.active = false
 
       # Explicitly save the session with both session_start and session_end
       if @reading_session.save
+        @tracker.current_page = @reading_session.page_count
+        @tracker.total_minutes_spent += @reading_session.duration
+        # @tracker.reading_status = "Reading session ended"
+        @tracker.save
         redirect_to reading_list_path(@tracker.reading_list), notice: "Reading session successfully ended."
       else
         redirect_to reading_list_path(@tracker.reading_list), alert: "Reading session could not end."
@@ -78,5 +86,9 @@ class ReadingSessionsController < ApplicationController
 
   def set_tracker
     @tracker = Tracker.find(params[:tracker_id])
+  end
+
+  def reading_session_params
+    params.require(:reading_session).permit(:page_count)
   end
 end

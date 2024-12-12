@@ -13,6 +13,9 @@ class TrackersController < ApplicationController
 
   # def update
   #   @tracker = Tracker.find(params[:id])
+  #   @reading_session = ReadingSession.find_by(tracker_id: @tracker).last
+  #   @tracker.current_page = @reading_session.page_count
+  #   @tracker.update
   # end
 
   private
