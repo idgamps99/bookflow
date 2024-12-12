@@ -1,6 +1,9 @@
 <p>List of books currently being tracked.</p>
-<ul>
-  <% @trackers.each do |t|%>
-    <li><%= link_to t.reading_list.book.title, reading_list_path(t.reading_list) %></li>
+
+<% @trackers.each do |t| %>
+  <%= link_to reading_list_path(t.reading_list), class: "session-card" do %>
+    <%= image_tag t.reading_list.book.cover_url %>
   <% end %>
-</ul>
+    <h3><%= t.reading_list.book.title %></h3>
+    <p><%= t.reading_list.book.author %></p>
+<% end %>
