@@ -14,6 +14,5 @@ export default class extends Controller {
 
   fireEdit() {
     this.toggleEditTarget.classList.toggle("d-none"); // Toggling the edit form
-    console.log("hello");
   }
 }
