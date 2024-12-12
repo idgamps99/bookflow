@@ -14,6 +14,8 @@
   <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
 <% else %>
   <%= @tracker.current_page %>
+  <%= @tracker.total_minutes_spent %>
+  <%= Time.at(@tracker.total_minutes_spent).utc.strftime("%H:%M:%S") %>
 
 
   <% if @reading_session.present? && @reading_session.active %>
@@ -29,3 +31,15 @@
 
 
 <% end %>
+
+
+<h2>Done Sess</h2>
+
+<ul>
+  <% @reading_sessions_done.each do |sess| %>
+    <li><%= sess.page_count %></li>
+    <li><%= sess.session_start %></li>
+    <li><%= sess.session_end %></li>
+    <li><%= sess.duration %></li>
+  <% end %>
+</ul>

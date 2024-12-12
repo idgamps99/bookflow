@@ -9,6 +9,7 @@ class ReadingListsController < ApplicationController
   def show
     @tracker = Tracker.find_by(reading_list_id: @reading_list)
     @reading_session = ReadingSession.find_by(tracker_id: @tracker, active: true)
+    @reading_sessions_done = ReadingSession.where(tracker_id: @tracker, active: false)
   end
 
   def create

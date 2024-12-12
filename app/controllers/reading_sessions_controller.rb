@@ -69,6 +69,10 @@ class ReadingSessionsController < ApplicationController
 
       # Explicitly save the session with both session_start and session_end
       if @reading_session.save
+        @tracker.current_page = @reading_session.page_count
+        @tracker.total_minutes_spent += @reading_session.duration
+        # @tracker.reading_status = "Reading session ended"
+        @tracker.save
         redirect_to reading_list_path(@tracker.reading_list), notice: "Reading session successfully ended."
       else
         redirect_to reading_list_path(@tracker.reading_list), alert: "Reading session could not end."
