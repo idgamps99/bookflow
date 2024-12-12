@@ -4,7 +4,7 @@ require "open-uri"
 class BooksController < ApplicationController
 
   def index
-    # Returns books in DB if no search queries present 
+    # Returns books in DB if no search queries present
     @books = Book.all
 
     # If search queries are present, call API
