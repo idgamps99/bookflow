@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = @book.reviews.find_by(key: params[:book_key])
+    @review = @book.reviews.find(params[:id])
     if @review.update(review_params)
       redirect_to @book, notice: 'Review updated.'
     else
@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = @book.reviews.find_by(key: params[:book_key])
+    @review = @book.reviews.find(params[:id])
     @review.destroy
     redirect_to @book, notice: 'Review deleted.'
   end
