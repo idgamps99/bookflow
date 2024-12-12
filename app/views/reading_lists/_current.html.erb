@@ -1,5 +1,4 @@
 <%= @reading_list.book.title %>
-
 <%= button_to "delete", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
 
 <p>tracker</p>

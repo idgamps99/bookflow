@@ -1,1 +1,6 @@
-<h2>all</h2>
+<p>List of books currently being tracked.</p>
+<ul>
+  <% @trackers.each do |t|%>
+    <li><%= link_to t.reading_list.book.title, reading_list_path(t.reading_list) %></li>
+  <% end %>
+</ul>
