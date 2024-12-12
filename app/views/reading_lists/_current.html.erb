@@ -1,0 +1,27 @@
+<%= @reading_list.book.title %>
+
+<%= button_to "delete", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
+
+<p>tracker</p>
+<% if @tracker.blank? %>
+  <p>Not tracked yet</p>
+  <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
+<% else %>
+  <%= @tracker.current_page %>
+  <%= @tracker.total_minutes_spent %>
+  <%= Time.at(@tracker.total_minutes_spent).utc.strftime("%H:%M:%S") %>
+
+
+  <% if @reading_session.present? && @reading_session.active %>
+    <p>Session is still ongoing</p>
+    <%= @reading_session.session_start %>
+    <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
+      <%= form.number_field :page_count %>
+      <%= form.submit "End Session" %>
+    <% end %>
+  <% else %>
+    <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }%>
+  <% end %>
+
+
+<% end %>

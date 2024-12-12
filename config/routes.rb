@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   patch "/reading_lists/:id", to: "reading_lists#deactivate", as: :deactivate
 
-  get 'reading_activity', to: 'reading_activites#index'
+
   resources :trackers, only: [:show, :update] do
     resources :reading_sessions, only: [:new, :create, :edit, :update]
   end

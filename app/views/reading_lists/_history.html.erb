@@ -1,0 +1,10 @@
+<h2>This is the history of the sessions.</h2>
+<%# Done sessions %>
+<ul>
+  <% @reading_sessions_done.each do |sess| %>
+    <li><%= sess.page_count %></li>
+    <li><%= sess.session_start %></li>
+    <li><%= sess.session_end %></li>
+    <li><%= sess.duration %></li>
+  <% end %>
+</ul>
