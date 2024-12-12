@@ -52,7 +52,6 @@ class ReviewsController < ApplicationController
   end
 
   def update_overall_rating(book)
-    # Need to set to 0 as if rating is nil as you cannot calculate new average
     book.overall_rating = 0 if book.overall_rating.nil?
     average_rating = book.reviews.sum(:rating) / book.reviews.count
   end
