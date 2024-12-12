@@ -4,7 +4,7 @@ require "open-uri"
 class BooksController < ApplicationController
 
   def index
-    # If no API call
+    # Returns books in DB if no search queries present 
     @books = Book.all
 
     # If search queries are present, call API
@@ -27,7 +27,7 @@ class BooksController < ApplicationController
 
   private
 
-  # Here be dragons. Pls don't touch this or i will cry, ta
+  # Pls don't touch this or i will cry
   # TODO: still don't have a rating when you create a new book
   def show_page_search(key)
     url = "https://www.googleapis.com/books/v1/volumes/#{key}?key=#{ENV['GOOGLE_API_KEY']}"

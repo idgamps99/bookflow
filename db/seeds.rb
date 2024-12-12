@@ -1,6 +1,6 @@
 # User.destroy_all
 # Destroy all your books in the database in the console first pls or errors will occur
-# This seed makes 100 API calls and we have a max 10,000 per day so don't reseed over and over again pls 'n thnx
+# This seed makes 100 API calls and we have a max 10,000 per day so don't destroy_all and reseed over and over again pls 'n thnx
 # If it fails at some point (it will) don't worry, it'll still have seeded some of them
 # You can manually seed by clicking on results in the index page
 # ^^^ each time you go to show page it will create a new instance of book, unless it exists already in the DB
@@ -105,7 +105,7 @@ books = [
 ]
 
 puts "Seeding books..."
-# There are some issues with this. It won't seed all of them
+# There are some issues with this. It won't seed all of them - not every search result h
 for i in 0...books.length do
   if !Book.exists?(title: books[i][0])
     url = "https://www.googleapis.com/books/v1/volumes?q=#{(books[i][0])}&key=#{ENV["GOOGLE_API_KEY"]}"
