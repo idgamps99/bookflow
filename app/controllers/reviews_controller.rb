@@ -16,12 +16,12 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:book_id])
-    @review = @book.reviews.find(params[:id])
+    @book = Book.find_by(key: params[:book_key])
+    @review = @book.reviews.find_by(key: params[:book_key])
   end
 
   def update
-    @review = @book.reviews.find(params[:id])
+    @review = @book.reviews.find_by(key: params[:book_key])
     if @review.update(review_params)
       redirect_to @book, notice: 'Review updated.'
     else
@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = @book.reviews.find(params[:id])
+    @review = @book.reviews.find_by(key: params[:book_key])
     @review.destroy
     redirect_to @book, notice: 'Review deleted.'
   end
@@ -38,7 +38,7 @@ class ReviewsController < ApplicationController
   private
 
   def set_book
-    @book = Book.find(params[:book_id])
+    @book = Book.find_by(key: params[:book_key])
   end
 
   def review_params
