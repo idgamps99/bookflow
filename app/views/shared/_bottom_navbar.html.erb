@@ -1,22 +1,22 @@
 <nav class="bottom_navbar">
   <ul class="bottom_navbar__tabs">
     <li class="bottom_navbar__tab">
-      <a href="http://[::1]:3000/discover" class="bottom_navbar__link" id="discover">
+      <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
         <i class="fas fa-compass"></i>
         <span>Discover</span>
-      </a>
+      <% end %>
     </li>
     <li class="bottom_navbar__tab">
-      <a href="#" class="bottom_navbar__link" id="reading-activity">
+      <%= link_to "#", class: "bottom_navbar__link", id: "reading-activity" do %>
         <i class="fas fa-book-open"></i>
         <span>Reading Activity</span>
-      </a>
+      <% end %>
     </li>
     <li class="bottom_navbar__tab">
-      <a href="http://[::1]:3000/readinglists" class="bottom_navbar__link" id="my-books">
+      <%= link_to reading_lists_path, class: "bottom_navbar__link", id: "my-books" do %>
         <i class="fa-solid fa-bookmark"></i>
         <span>My Books</span>
-      </a>
+      <% end %>
     </li>
   </ul>
   <div class="home-indicator"></div>

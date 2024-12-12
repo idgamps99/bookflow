@@ -1,2 +1,46 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%= content_for :title, "Discover" %>
+
+<div class="discover-container">
+
+  <div class="search-bar">
+    <%= form_with url: books_path(params[:query]), method: :get, local: true, html: { autocomplete: "off" } do |f| %>
+      <%= f.text_field :query, placeholder: "Search for a book...", value: params[:query] %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
+
+  <div class="genres">
+    <h3>Genres</h3>
+    <div class="genre-buttons">
+      <% @genres.each do |genre| %>
+        <%= link_to genre.genre, books_path(genre_query: genre.genre), class: "genre-button" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="recommendations">
+    <h3>Recommendations</h3>
+    <div class="books">
+      <% @recommended_books.each do |book| %>
+        <div class="book-card">
+          <h4><%= book.title %></h4>
+          <p><%= book.author %></p>
+          <p><%= book.overall_rating %> ★</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="top-picks">
+    <h3>Today's Top Picks</h3>
+    <div class="books">
+      <% @top_picks.each do |book| %>
+        <div class="book-card">
+          <h4><%= book.title %></h4>
+          <p><%= book.author %></p>
+          <p><%= book.overall_rating %> ★</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
