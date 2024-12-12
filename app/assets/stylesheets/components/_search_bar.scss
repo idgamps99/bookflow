@@ -11,18 +11,31 @@
   border-radius: 15px;
   padding: 5px 15px;
   width: 100%;
+  border: none;
 }
 
-.search-input {
+.search-form:focus {
+  display: flex;
+  align-items: center;
+  background-color: #e7e7e7;
+  border-radius: 15px;
+  padding: 5px 15px;
+  width: 100%;
   border: none;
-  background: none;
-  flex-grow: 1;
-  padding: 10px;
-  font-size: 16px;
-  outline: none;
-  border-radius: 50px;
 }
 
 .search-input::placeholder {
   color: #a3a3a3;
+}
+
+.hidden-button {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.search-field {
+  background-color: #e7e7e700;
+  border: none;
+  padding-left: 10px;
 }

@@ -5,8 +5,8 @@
   <div class="search-bar">
     <%= form_with url: books_path(params[:query]), method: :get, local: true, html: { autocomplete: "off" }, class: "search-form" do |f| %>
       <i class="fa-solid fa-magnifying-glass" style="color: #b8b8b8;"></i>
-      <%= f.text_field :query, placeholder: "Search for a book", value: params[:query] %>
-      <%= f.submit "Search" %>
+      <%= f.text_field :query, placeholder: "Search for a book", value: params[:query], class: "search-field" %>
+      <%= f.submit "Search", class: "hidden-button" %>
     <% end %>
   </div>
 
@@ -54,25 +54,53 @@
   </div>
 
   <div class="book-section">
-  <h3>Recommendations</h3>
-  <div class="books">
-    <% @recommended_books.each do |book| %>
-      <div class="book-card">
-        <%= image_tag(book.cover_url, alt: book.title, class: "book-cover") %>
-        <p><%= book.overall_rating %> ★</p>
-      </div>
-    <% end %>
+    <h3>Recommendations</h3>
+    <div class="books">
+      <% @recommended_books.each do |book| %>
+        <div class="book-card">
+          <% if book.cover_url.present? %>
+            <div class="book-cover-container">
+              <%= link_to book_path(book) do %>
+                <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="book-cover-container">
+              <%= link_to book_path(book) do %>
+                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+              <% end %>
+            </div>
+          <% end %>
+          <p>
+            <%= book.overall_rating.present? ? "#{book.overall_rating} ★" : "n/a ★" %>
+          </p>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div class="book-section">
-  <h3>Today's Top Picks</h3>
-  <div class="books">
-    <% @top_picks.each do |book| %>
-      <div class="book-card">
-        <%= image_tag(book.cover_url, alt: book.title, class: "book-cover") %>
-        <p><%= book.overall_rating %> ★</p>
-      </div>
-    <% end %>
+  <div class="book-section">
+    <h3>Today's Top Picks</h3>
+    <div class="books">
+      <% @top_picks.each do |book| %>
+        <div class="book-card">
+          <% if book.cover_url.present? %>
+            <div class="book-cover-container">
+              <%= link_to book_path(book) do %>
+                <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="book-cover-container">
+              <%= link_to book_path(book) do %>
+                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+              <% end %>
+            </div>
+          <% end %>
+          <p>
+            <%= book.overall_rating.present? ? "#{book.overall_rating} ★" : "n/a ★" %>
+          </p>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
