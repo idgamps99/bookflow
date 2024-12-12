@@ -1,54 +1,70 @@
-<h1><%= @book.title %></h1>
-<%= image_tag @book.cover_url, alt: @book.title %>
-<p><strong>Author:</strong> <%= @book.author %></p>
-<p><strong>Published Year:</strong> <%= @book.year_published %></p>
-<p><strong>Genre:</strong> <%= @book.genre %></p>
-<p><strong>Page Count:</strong> <%= @book.page_count %> pages</p>
-<p><strong>Overall Rating:</strong> <%= number_with_precision @book.overall_rating, precision: 1 %>/5.0</p>
-<p><strong>Summary:</strong></p>
-<p><%= @book.summary %></p>
-
-<%= button_to "Add", book_reading_lists_path(@book), method: :post %>
-
-<h3>Reviews</h3>
-<%# --- Pop-up form --- %>
-<div data-controller="toggle">
-  <%# --- Review button --- %>
-  <button type="button" data-action="click->toggle#fireReview">Leave a Review</button>
-  <div data-toggle-target="togglableElement" class="d-none">
-    <div id="review-form">
-      <h3>Leave a Review for <%= @book.title %></h3>
-      <%= simple_form_for([@book, @book.reviews.new], html: { autocomplete: "off" }) do |f| %>
-        <%= f.input :title, label: "Title",  autocomplete: "off" %>
-        <%= f.input :content,  autocomplete: "off" %>
-        <%= f.input :rating, label: "Rating 0-5",  autocomplete: "off" %>
-        <%= f.button :submit, value: "Submit Review" %>
-      <% end %>
+<div class="book-detail-container">
+  <div class="book-detail-header">
+    <div class="book-detail-cover-container">
+      <%= image_tag @book.cover_url.present? ? @book.cover_url : '/assets/images/Discover/missingbook.jpeg', alt: @book.title, class: "book-detail-cover" %>
+    </div>
+    <div class="book-detail-info">
+      <h1><%= @book.title %></h1>
+      <p>by <%= @book.author %></p>
+      <br>
+      <p><strong>Published Year:</strong> <%= @book.year_published %></p>
+      <p><strong>Genre:</strong> <%= @book.genre %></p>
+      <p><strong>Page Count:</strong> <%= @book.page_count %> pages</p>
+      <p>
+        <strong>Overall Rating:</strong>
+        <i class="fas fa-star" style="color: #FFD700;"></i>
+        <%= @book.overall_rating.to_i == @book.overall_rating ? @book.overall_rating.to_i : number_with_precision(@book.overall_rating, precision: 1) %>
+        / 5
+      </p>
     </div>
   </div>
 
+  <p><strong>Summary:</strong></p>
+  <p class="book-detail-summary"><%= @book.summary %></p>
 
-<% @book.reviews.each do |review| %>
-  <%# <p><strong><%= review.user.username:</strong></p> %>
-  <h5><%= review.title %></h5>
-  <p><%= review.content %></p>
-  <p>Rating: <%= review.rating %></p>
+  <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button" %>
 
-  <% if review.user == current_user %>
-      <%# --- Edit button --- %>
-      <button type="button" data-action="click->toggle#fireEdit">Edit Review</button>
-      <div data-toggle-target="toggleEdit" class="d-none">
-        <div id="edit-form">
-          <h2>Edit review for <%= @book.title %></h2>
-          <%= simple_form_for([@book, review]) do |f| %>
-            <%= f.input :title, label: "Title" %>
-            <%= f.input :content %>
-            <%= f.input :rating, label: "Rating 0-5" %>
-            <%= f.button :submit, value: "Update" %>
-          <% end %>
-        </div>
+  <h3>Reviews</h3>
+
+  <!-- Review Form Toggle -->
+  <div data-controller="toggle">
+    <button type="button" data-action="click->toggle#fireReview" class="book-detail-leave-review-btn">Leave a Review</button>
+    <div data-toggle-target="togglableElement" class="d-none">
+      <div id="review-form">
+        <h3>Leave a Review for <%= @book.title %></h3>
+        <%= simple_form_for([@book, @book.reviews.new], html: { autocomplete: "off" }) do |f| %>
+          <%= f.input :title, label: "Title", autocomplete: "off", class: "input-title" %>
+          <%= f.input :content, autocomplete: "off", class: "input-content" %>
+          <%= f.input :rating, label: "Rating (0-5)", autocomplete: "off", class: "input-rating" %>
+          <%= f.button :submit, value: "Submit Review", class: "book-detail-submit-review-btn" %>
+        <% end %>
       </div>
     </div>
-    <%= link_to "Delete", book_review_path(@book, review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  </div>
+
+  <!-- Reviews Display -->
+  <% @book.reviews.each do |review| %>
+    <div class="review">
+      <h5><%= review.title %></h5>
+      <p><%= review.content %></p>
+      <p>Rating: <%= review.rating %></p>
+
+      <!-- Edit & Delete Options for the User's Own Review -->
+      <% if review.user == current_user %>
+        <button type="button" data-action="click->toggle#fireEdit" class="edit-review-btn">Edit Review</button>
+        <div data-toggle-target="toggleEdit" class="d-none">
+          <div id="edit-form">
+            <h2>Edit review for <%= @book.title %></h2>
+            <%= simple_form_for([@book, review]) do |f| %>
+              <%= f.input :title, label: "Title", class: "input-title" %>
+              <%= f.input :content, class: "input-content" %>
+              <%= f.input :rating, label: "Rating (0-5)", class: "input-rating" %>
+              <%= f.button :submit, value: "Update Review", class: "submit-review-btn" %>
+            <% end %>
+          </div>
+        </div>
+        <%= link_to "Delete", book_review_path(@book, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete-review-btn" %>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>

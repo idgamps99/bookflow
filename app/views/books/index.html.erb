@@ -1,8 +1,37 @@
-<% if params[:query].present? || params{:genre_query}.present? %>
-    <% @books.each do |book| %>
-      <%= link_to book_path(book.key) do %>
-        <%# the unless statement prevents error: not every result has a cover %>
-        <%= image_tag book.cover_url, alt: "Book Cover" unless book.cover_url.nil? %>
-      <% end %>
-    <% end %>
-<% end %>
+<%= content_for :title, "Books" %>
+
+<div class="index-container">
+
+  <%= render "shared/search_bar" %>
+
+  <% if params[:query].present? || params[:genre_query].present? %>
+    <div class="book-section">
+      <h3>Search Results</h3>
+      <div class="books">
+        <% @books.each do |book| %>
+          <div class="book-card">
+            <% if book.cover_url.present? %>
+              <div class="book-cover-container">
+                <%= link_to book_path(book.key) do %>
+                  <%= image_tag book.cover_url, alt: "Book Cover", class: "book-cover" %>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="book-cover-container">
+                <%= link_to book_path(book.key) do %>
+                  <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+                <% end %>
+              </div>
+            <% end %>
+            <p>
+              <%= book.overall_rating.present? ? "#{book.overall_rating} ★" : "n/a ★" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p>No search results found. Try searching for a different book or genre.</p>
+  <% end %>
+
+</div>

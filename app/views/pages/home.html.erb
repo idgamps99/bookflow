@@ -48,29 +48,29 @@
   </div>
 
   <div class="book-section">
-    <h3>Recommendations</h3>
-    <div class="books">
-      <% @recommended_books.each do |book| %>
-        <div class="book-card">
-          <% if book.cover_url.present? %>
-            <div class="book-cover-container">
-              <%= link_to book_path(book) do %>
-                <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
-              <% end %>
-            </div>
-          <% else %>
-            <div class="book-cover-container">
-              <%= link_to book_path(book) do %>
-                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
-              <% end %>
-            </div>
-          <% end %>
-          <p>
-            <%= book.overall_rating.present? ? "#{book.overall_rating} ★" : "n/a ★" %>
-          </p>
-        </div>
-      <% end %>
-    </div>
+  <h3>Recommendations</h3>
+  <div class="books">
+    <% @recommended_books.each do |book| %>
+      <div class="book-card">
+        <% if book.cover_url.present? %>
+          <div class="book-cover-container">
+            <%= link_to book_path(book) do %>
+              <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="book-cover-container">
+            <%= link_to book_path(book) do %>
+              <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+            <% end %>
+          </div>
+        <% end %>
+        <p class="book-rating">
+          <%= book.overall_rating.present? ? "<i class='fas fa-star' style='color: #FFD700;'></i> #{number_with_precision(book.overall_rating, precision: 1)}".html_safe : "<i class='fas fa-star' style='color: #FFD700;'></i> n/a".html_safe %>
+        </p>
+      </div>
+    <% end %>
+  </div>
   </div>
 
   <div class="book-section">
@@ -91,8 +91,8 @@
               <% end %>
             </div>
           <% end %>
-          <p>
-            <%= book.overall_rating.present? ? "#{book.overall_rating} ★" : "n/a ★" %>
+          <p class="book-rating">
+            <%= book.overall_rating.present? ? "<i class='fas fa-star' style='color: #FFD700;'></i> #{number_with_precision(book.overall_rating, precision: 1)}".html_safe : "<i class='fas fa-star' style='color: #FFD700;'></i> n/a".html_safe %>
           </p>
         </div>
       <% end %>
