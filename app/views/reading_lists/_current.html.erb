@@ -16,7 +16,7 @@
     <p>Session is still ongoing</p>
     <%= @reading_session.session_start %>
     <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
-      <%= form.number_field :page_count %>
+      <%= form.number_field :page_count, value: @tracker.current_page %>
       <%= form.submit "End Session" %>
     <% end %>
   <% else %>

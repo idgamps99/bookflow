@@ -28,7 +28,7 @@ module Bookflow
     # in config/environments, which are processed later.
     #
     config.time_zone = "Europe/Paris"
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

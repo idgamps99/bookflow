@@ -1,5 +1,10 @@
 class TrackersController < ApplicationController
 
+  def index
+    @reading_lists = ReadingList.where(active: true, user_id: current_user)
+    @trackers = Tracker.where(reading_list_id: @reading_lists)
+  end
+
   def create
     @reading_list = ReadingList.find(params[:reading_list_id])
     @tracker = Tracker.new()
