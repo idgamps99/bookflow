@@ -52,6 +52,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'faker'
 gem 'pg_search'
+gem "chartkick"
+gem "groupdate"
 
 group :development, :test do
   gem "dotenv-rails"

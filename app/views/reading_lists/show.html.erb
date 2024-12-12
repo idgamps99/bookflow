@@ -1,4 +1,6 @@
 <!--
+<h1>Some style</h1>
+
 <%= @reading_list.book.title %>
 
 <%= button_to "delete", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
@@ -11,16 +13,32 @@
   <p>Not tracked yet</p>
   <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
 <% else %>
-  <%= @tracker.current_page %>
-  <%= @tracker.total_minutes_spent %>
-  <%= Time.at(@tracker.total_minutes_spent).utc.strftime("%H:%M:%S") %>
+  <p>Current page at: <%= @tracker.current_page %></p>
+  <p>Total time spent:
+    <%= @tracker.total_minutes_spent / 3600 %> Hours,
+    <%= (@tracker.total_minutes_spent % 3600) / 60 %> Minutes,
+    <%= @tracker.total_minutes_spent % 60 %> Seconds
+  </p>
+
+  <%= column_chart @reading_sessions_done
+                   .group_by_day_of_week(:created_at, format: "%a")
+                   .sum(:duration),
+                   xtitle: "Day of Week",
+                   ytitle: "Total Duration" %>
+
+
+  <%= column_chart @reading_sessions_done
+                      .group_by_day_of_week(:created_at, format: "%a")
+                      .average(:page_count).map { |k, v| [k, v.to_i] },
+                      xtitle: "Day of Week",
+                      ytitle: "average page red" %>
 
 
   <% if @reading_session.present? && @reading_session.active %>
     <p>Session is still ongoing</p>
     <%= @reading_session.session_start %>
     <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
-      <%= form.number_field :page_count %>
+      <%= form.number_field :page_count, value: @tracker.current_page %>
       <%= form.submit "End Session" %>
     <% end %>
   <% else %>
