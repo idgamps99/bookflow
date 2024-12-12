@@ -1,0 +1,25 @@
+<p>tracker</p>
+<% if @tracker.blank? %>
+  <p>Not tracked yet</p>
+<% else %>
+  <p>Current page at: <%= @tracker.current_page %></p>
+  <p>Total time spent:
+    <%= @tracker.total_minutes_spent / 3600 %> Hours,
+    <%= (@tracker.total_minutes_spent % 3600) / 60 %> Minutes,
+    <%= @tracker.total_minutes_spent % 60 %> Seconds
+  </p>
+
+  <%= column_chart @reading_sessions_done
+                   .group_by_day_of_week(:created_at, format: "%a")
+                   .sum(:duration),
+                   xtitle: "Day of Week",
+                   ytitle: "Total Duration" %>
+
+
+  <%= column_chart @reading_sessions_done
+                      .group_by_day_of_week(:created_at, format: "%a")
+                      .average(:page_count).map { |k, v| [k, v.to_i] },
+                      xtitle: "Day of Week",
+                      ytitle: "average page red" %>
+
+<% end %>
