@@ -1,0 +1,52 @@
+.book-section {
+margin-left: 10px;
+margin-right: 10px;
+margin-bottom: 5px;
+}
+
+.book-section h3 {
+  text-align: left;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.books {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.book-cover-container {
+  width: 80px;  /* Halved the width */
+  height: 120px;  /* Halved the height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;  /* Ensures the cover fits within the container */
+}
+
+.book-card {
+  text-align: center;
+  width: 150px;
+}
+
+.book-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-card h4 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+.book-card p {
+  font-size: 14px;
+  color: #555;
+}
