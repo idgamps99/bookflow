@@ -1,4 +1,4 @@
-<p>tracker</p>
+
 <!--
 <% if @tracker.blank? %>
   <p>Not tracked yet</p>
@@ -25,3 +25,20 @@
 
 <% end %>
 -->
+<p><%= @trackers_all.count %> Books tracked</p>
+
+<%= line_chart @trackers_all.group_by_day(:created_at, format: "%a").count
+                  .map { |k, v| [k, v] },
+                  ytitle: "Total Books" %>
+
+
+
+<p>Total pages read: <%= @total_current_pages %></p>
+<%= line_chart @trackers_all.group_by_day(:created_at, format: "%a")
+                    .average(:current_page),
+                    ytitle: "Average per Day" %>
+
+<p>Total Time spent reading: <%= Time.at(@total_minutes_spent).utc.strftime("%H:%M:%S") %></p>
+<%= line_chart @trackers_all.group_by_day(:created_at, format: "%a").average(:total_minutes_spent)
+                              .map { |k, v| [k, v.to_i]},
+                              ytitle: "Average per Day" %>
