@@ -23,10 +23,10 @@
   <p class="book-detail-summary"><%= @book.summary %></p>
 
   <div id="reading-list-actions" data-controller="reading-list-session-button">
-    <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action:"click->reading-list-session-button#fireReview" } %>
+    <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action:"click->reading-list-session-button#fireReview", turbo_method: :post } %>
     <div id="confirmation-message" data-reading-list-session-button-target="message" class="d-none">
       <p>Your book has been added to your reading list!</p>
-      <button type="button" id="start-reading-session-btn" data-reading-list-session-button-target="button" class="book-detail-start-reading-session-btn d-none" data-action="click->toggle#fireStartReadingSession">Start Reading Session</button>
+      <button type="button" id="start-reading-session-btn" data-reading-list-session-button-target="button" class="book-detail-start-reading-session-btn d-none" data-action="click->toggle#fireStartReadingSession">Start Tracking</button>
     </div>
   </div>
 
