@@ -1,3 +1,5 @@
+<%= render "shared/search_bar" %>
+
 <% if params[:query].present? || params{:genre_query}.present? %>
     <% @books.each do |book| %>
       <%= link_to book_path(book.key) do %>

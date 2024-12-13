@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :reading_lists, only: [:create]
   end
 
+  get "/genres", to: "books#genres_index"
   patch "/reading_lists/:id", to: "reading_lists#deactivate", as: :deactivate
 
   resources :trackers, only: [:index, :update] do
