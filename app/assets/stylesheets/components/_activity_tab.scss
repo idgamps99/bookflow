@@ -1,0 +1,11 @@
+.nav-pills .nav-link {
+  &.active {
+    background: linear-gradient(90deg, #e49933, #e36f08); // Change to your desired background color
+    color: #ffffff; // Change to your desired text color
+  }
+
+  &:not(.active) {
+    background-color: #f8f9fa; // Default background for inactive buttons
+    color: #333; // Default text color for inactive buttons
+  }
+}

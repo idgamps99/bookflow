@@ -1,0 +1,72 @@
+// Variables
+$card-bg-color: #f9f9f9;
+$card-hover-bg-color: #ffffff;
+$card-border-radius: 12px;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+$text-color: #666;
+$linear-color: linear-gradient(90deg, #e49933, #e36f08);
+
+// Container for the cards
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+// Card styles
+.session-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $card-bg-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 350px; // Ensure consistent card size
+  padding: 16px;
+
+  // Image styling
+  .book-cover {
+    width: 120px; // Fixed width for uniformity
+    height: auto;
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+
+  // Text styling
+  .card-details {
+    text-align: center;
+
+    .book-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .book-author {
+      font-size: 14px;
+      color: $text-color;
+      margin-top: 4px;
+    }
+  }
+
+  .progress {
+    background-color: #e1e1e1;
+    border-radius: 5px;
+    width: 250px;
+    height: 20px;
+
+    .progress-bar {
+      background: $linear-color;
+      width: 125px;
+      height: 100%;
+      border-radius: 5px;
+    }
+  }
+}

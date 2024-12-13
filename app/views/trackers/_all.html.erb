@@ -1,9 +1,17 @@
 <p>List of books currently being tracked.</p>
+<div class="activity-card-container">
+  <% @trackers.each do |t| %>
+    <%= link_to reading_list_path(t.reading_list), class: "session-card" do %>
+      <%= image_tag t.reading_list.book.cover_url %>
+      <div class="activity-card-details">
+        <h3><%= t.reading_list.book.title %></h3>
+        <p><%= t.reading_list.book.author %></p>
+      </div>
 
-<% @trackers.each do |t| %>
-  <%= link_to reading_list_path(t.reading_list), class: "session-card" do %>
-    <%= image_tag t.reading_list.book.cover_url %>
+      <!-- Progress bar -->
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
+      </div>
+    <% end %>
   <% end %>
-    <h3><%= t.reading_list.book.title %></h3>
-    <p><%= t.reading_list.book.author %></p>
-<% end %>
+</div>
