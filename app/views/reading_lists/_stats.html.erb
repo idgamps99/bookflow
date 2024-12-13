@@ -9,13 +9,16 @@
   </p>
 
   <%= column_chart @reading_sessions_done
-                   .group_by_day_of_week(:session_start, format: "%a")
-                   .sum(:duration).map { |k, v| [k, v/60] },
-                   ytitle: "Total Duration (minutes)",
-                    library: {
+                    .group_by_day_of_week(:session_start, format: "%a")
+                    .sum(:duration).map { |k, v| [k, v/60] },
+                    ytitle: "Total Duration (minutes)",
+                        title: "Reading Sessions Duration",
+                        library: {
                           scales: {
                             y: {
-                              display: false
+                              ticks: {
+                              stepSize: 30
+                              }
                             }
                           }
                         } %>
