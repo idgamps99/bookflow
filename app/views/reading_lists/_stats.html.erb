@@ -11,9 +11,9 @@
 
   <%= column_chart @reading_sessions_done
                    .group_by_day_of_week(:session_start, format: "%a")
-                   .sum(:duration),
+                   .sum(:duration).map { |k, v| [k, v/60] },
                    xtitle: "Day of Week",
-                   ytitle: "Total Duration" %>
+                   ytitle: "Total Duration (minutes)" %>
 
 
   <%= column_chart @reading_sessions_done
