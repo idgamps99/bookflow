@@ -28,12 +28,13 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s, box-shadow 0.2s;
-  height: 350px; // Ensure consistent card size
+  height: 350px;
   padding: 16px;
+  margin: 15px;
 
   // Image styling
   .book-cover {
-    width: 120px; // Fixed width for uniformity
+    width: 120px;
     height: auto;
     margin-bottom: 16px;
     border-radius: 8px;
@@ -59,12 +60,12 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
   .progress {
     background-color: #e1e1e1;
     border-radius: 5px;
-    width: 250px;
     height: 15px;
+    width: 200px;
+    overflow: hidden;
 
     .progress-bar {
       background: $linear-color;
-      width: 125px;
       height: 100%;
       border-radius: 5px;
     }

@@ -10,11 +10,18 @@
 
       <!-- Progress bar -->
       <div class="progress">
+        <% total_pages = t.reading_list.book.page_count %>
+        <% current_page = t.current_page %>
+        <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
+
+
         <div class="progress-bar"
             role="progressbar"
-            aria-valuenow="25"
+            aria-valuenow="<% progress_percentage %>"
             aria-valuemin="0"
-            aria-valuemax="100">50%</div>
+            aria-valuemax="100"
+            style="width: <%= progress_percentage %>%;"><%= progress_percentage %>%
+          </div>
       </div>
     <% end %>
   <% end %>
