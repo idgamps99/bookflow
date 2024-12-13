@@ -1,4 +1,3 @@
-<p>tracker</p>
 <% if @tracker.blank? %>
   <p>Not tracked yet</p>
 <% else %>
@@ -10,16 +9,24 @@
   </p>
 
   <%= column_chart @reading_sessions_done
-                   .group_by_day_of_week(:session_start, format: "%a")
-                   .sum(:duration),
-                   xtitle: "Day of Week",
-                   ytitle: "Total Duration" %>
+                    .group_by_day_of_week(:session_start, format: "%a")
+                    .sum(:duration).map { |k, v| [k, v/60] },
+                    ytitle: "Total Duration (minutes)",
+                        title: "Reading Sessions Duration",
+                        library: {
+                          scales: {
+                            y: {
+                              ticks: {
+                              stepSize: 30
+                              }
+                            }
+                          }
+                        } %>
 
 
   <%= column_chart @reading_sessions_done
                       .group_by_day_of_week(:session_start, format: "%a")
                       .average(:page_count).map { |k, v| [k, v.to_i] },
-                      xtitle: "Day of Week",
                       ytitle: "average page red" %>
 
 <% end %>

@@ -5,6 +5,7 @@ import "@popperjs/core"
 import "bootstrap"
 import "chartkick"
 import "Chart.bundle"
+// import { Turbo } from "turbo-rails"
 
 function updateTime() {
   const now = new Date();
