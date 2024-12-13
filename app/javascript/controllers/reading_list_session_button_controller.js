@@ -10,7 +10,7 @@ export default class extends Controller {
   // Handles the confirmation message and shows the 'Start Reading Session' button
   fireReview() {
     console.log("Reviewing the reading");
-    event.preventDefault();
+    // event.preventDefault();
     this.messageTarget.classList.remove("d-none");
     this.buttonTarget.classList.remove("d-none");
   }
