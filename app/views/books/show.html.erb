@@ -1,5 +1,5 @@
 <h1><%= @book.title %></h1>
-<%= image_tag @book.cover_url, alt: @book.title %>
+<%= image_tag @book.cover_url, alt: @book.title unless @book.cover_url.nil? %>
 <p><strong>Author:</strong> <%= @book.author %></p>
 <p><strong>Published Year:</strong> <%= @book.year_published %></p>
 <p><strong>Genre:</strong> <%= @book.genre %></p>
