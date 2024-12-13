@@ -18,13 +18,20 @@ class ReadingListsController < ApplicationController
     @reading_list = ReadingList.new
     @reading_list.user = @user
     @reading_list.book = @book
+
     if @reading_list.save
-      redirect_to reading_lists_path, notice: "Book successfully added to your reading list."
+      respond_to do |format|
+        format.html { redirect_to @book, notice: "Book successfully added to your reading list." }
+        format.js   # Trigger JS response for dynamic update
+      end
     else
       @reading_list = ReadingList.find_by(user: current_user, book: @book)
       @reading_list.active = true
       @reading_list.save
-      redirect_to reading_lists_path, alert: "Book has been reactivated."
+      respond_to do |format|
+        format.html { redirect_to @book, alert: "Book has been reactivated." }
+        format.js   # Trigger JS response for dynamic update
+      end
     end
   end
 

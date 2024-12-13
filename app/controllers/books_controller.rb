@@ -2,7 +2,6 @@ require "json"
 require "open-uri"
 
 class BooksController < ApplicationController
-
   def index
     # Returns books in DB if no search queries present
     @books = Book.all
@@ -22,6 +21,13 @@ class BooksController < ApplicationController
       @book
     else
       @book = show_page_search(params[:key])
+    end
+  end
+
+  def genres_index
+    @genres = { Fantasy: [], Novels: [], Romance: [], Thriller: [], Mystery: [], Crime: [] }
+    @genres.each do |key, value|
+      value.concat(genre_search(key.to_s))
     end
   end
 
