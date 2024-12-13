@@ -1,4 +1,6 @@
-<%= @reading_list.book.title %>
+<h2><%= @reading_list.book.title %></h2>
+<h3><%= @reading_list.book.author %></h3>
+<%= image_tag @reading_list.book.cover_url %>
 
 <%= button_to "delete", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
 
