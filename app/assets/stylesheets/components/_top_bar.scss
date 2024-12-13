@@ -7,6 +7,11 @@
   color: #000;
   font-family: Arial, sans-serif;
   font-size: 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 .top-bar .left {
@@ -30,9 +35,9 @@
 
 .dynamic-island {
   position: absolute;
-  top: 10px; /* Adjust this value as needed to position it near the top of the screen */
+  top: 10px;
   left: 50%;
-  transform: translateX(-50%); /* This will center the pill horizontally */
+  transform: translateX(-50%);
   background-color: black;
   color: white;
   padding: 12px 40px;
@@ -44,4 +49,9 @@
 
 .dynamic-island span {
   color: white;
+}
+
+
+body {
+  margin-top: 50px;
 }

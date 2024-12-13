@@ -1,0 +1,134 @@
+.book-detail-container {
+  margin: 20px;
+}
+
+/* Flex container for cover and book info */
+.book-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-detail-cover-container {
+  flex-shrink: 0;
+  width: 160px;
+  margin-right: 20px;
+}
+
+.book-detail-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.book-detail-info {
+  flex-grow: 1;
+}
+
+.book-detail-info h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.book-detail-info p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.book-detail-summary {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3b3b3b;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.book-detail-add-button, .book-detail-submit-review-btn, .book-detail-edit-review-btn, .book-detail-delete-review-btn {
+  background: linear-gradient(90deg, #e49933, #e36f08);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.book-detail-leave-review-btn {
+  background: grey;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+/* Reviews Section */
+.book-detail-reviews-heading {
+  font-size: 24px;
+  margin-top: 40px;
+}
+
+.book-detail-review {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.book-detail-review-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.book-detail-review-content {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.book-detail-review-rating {
+  font-size: 14px;
+  color: #555;
+}
+
+.book-detail-input-title, .book-detail-input-content, .book-detail-input-rating {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.book-detail-input-title, .book-detail-input-content {
+  height: 40px;
+}
+
+.book-detail-input-rating {
+  width: 60px;
+}
+
+.book-detail-review-form-container, .book-detail-edit-form-container {
+  margin-top: 20px;
+}
+
+.book-detail-review-form, .book-detail-edit-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Hide elements by default */
+.d-none {
+  display: none;
+}
+
+.book-rating {
+  margin-top: 5px;
+}
