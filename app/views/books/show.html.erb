@@ -1,7 +1,7 @@
-<div class="book-detail-container">
+<div class="book-detail-container" data-controller="toggle" >
   <div class="book-detail-header">
     <div class="book-detail-cover-container">
-      <%= image_tag @book.cover_url.present? ? @book.cover_url : '/assets/images/Discover/missingbook.jpeg', alt: @book.title, class: "book-detail-cover" %>
+      <%= image_tag @book.cover_url.present? ? @book.cover_url : 'Discover/missingbook.jpeg', alt: @book.title, class: "book-detail-cover" %>
     </div>
     <div class="book-detail-info">
       <h1><%= @book.title %></h1>
@@ -13,7 +13,7 @@
       <p>
         <strong>Overall Rating:</strong>
         <i class="fas fa-star" style="color: #FFD700;"></i>
-        <%= @book.overall_rating.to_i == @book.overall_rating ? @book.overall_rating.to_i : number_with_precision(@book.overall_rating, precision: 1) %>
+        <%= @book.overall_rating == @book.overall_rating ? @book.overall_rating : number_with_precision(@book.overall_rating, precision: 1) %>
         / 5
       </p>
     </div>
@@ -22,12 +22,18 @@
   <p><strong>Summary:</strong></p>
   <p class="book-detail-summary"><%= @book.summary %></p>
 
-  <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button" %>
+  <div id="reading-list-actions" data-controller="reading-list-session-button">
+    <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action:"click->reading-list-session-button#fireReview" } %>
+    <div id="confirmation-message" data-reading-list-session-button-target="message" class="d-none">
+      <p>Your book has been added to your reading list!</p>
+      <button type="button" id="start-reading-session-btn" data-reading-list-session-button-target="button" class="book-detail-start-reading-session-btn d-none" data-action="click->toggle#fireStartReadingSession">Start Reading Session</button>
+    </div>
+  </div>
 
   <h3>Reviews</h3>
 
   <!-- Review Form Toggle -->
-  <div data-controller="toggle">
+  <div >
     <button type="button" data-action="click->toggle#fireReview" class="book-detail-leave-review-btn">Leave a Review</button>
     <div data-toggle-target="togglableElement" class="d-none">
       <div id="review-form">
@@ -55,7 +61,7 @@
         <div data-toggle-target="toggleEdit" class="d-none">
           <div id="edit-form">
             <h2>Edit review for <%= @book.title %></h2>
-            <%= simple_form_for([@book, review]) do |f| %>
+               <%= simple_form_for([@book, review], url: book_review_path(@book, review)) do |f| %>
               <%= f.input :title, label: "Title", class: "input-title" %>
               <%= f.input :content, class: "input-content" %>
               <%= f.input :rating, label: "Rating (0-5)", class: "input-rating" %>

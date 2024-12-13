@@ -6,7 +6,7 @@
 .book-detail-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;  /* This aligns the content vertically in the middle */
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -36,7 +36,6 @@
   font-size: 16px;
 }
 
-/* Book Summary Section */
 .book-detail-summary {
   font-size: 16px;
   line-height: 1.6;
@@ -45,7 +44,6 @@
   text-justify: inter-word;
 }
 
-/* Button Styling */
 .book-detail-add-button, .book-detail-submit-review-btn, .book-detail-edit-review-btn, .book-detail-delete-review-btn {
   background: linear-gradient(90deg, #e49933, #e36f08);
   color: white;
@@ -99,7 +97,6 @@
   color: #555;
 }
 
-/* Input fields */
 .book-detail-input-title, .book-detail-input-content, .book-detail-input-rating {
   width: 100%;
   padding: 10px;
