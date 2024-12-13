@@ -15,7 +15,7 @@
   </div>
 
   <div class="genres">
-    <h3>Genres</h3>
+    <h3><%= link_to "Genres", genres_path %></h3>
     <div class="genre-buttons">
       <div class="genre-container">
         <%= link_to books_path(genre_query: "Fantasy"), class: "genre-button" do %>
