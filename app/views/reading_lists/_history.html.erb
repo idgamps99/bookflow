@@ -16,11 +16,6 @@
   <p>No sessions done yet</p>
 <% else %>
 
-  <% @reading_sessions_done.each do |ses| %>
-    <p>Pages read during the session: <%= ses.page_count %></p>
-    <p>Session start: <%= ses.session_start.strftime("%B %d, %Y %I:%M %p") %></p>
-    <p>Session end: <%= ses.session_end.strftime("%B %d, %Y %I:%M %p") %></p>
-    <p>Duration: <%= Time.at(ses.duration).utc.strftime("%H:%M:%S") %></p>
-  <% end %>
+ <%= render "session" %>
 
 <% end %>
