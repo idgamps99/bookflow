@@ -2,7 +2,7 @@ class TrackersController < ApplicationController
 
   def index
     @reading_lists = ReadingList.where(active: true, user_id: current_user)
-    @trackers = Tracker.where(reading_list_id: @reading_lists)
+    @trackers = Tracker.where(reading_list_id: @reading_lists).order(updated_at: :desc)
     @reading_lists_all = ReadingList.where(user_id: current_user)
     @trackers_all = Tracker.where(reading_list_id: @reading_lists_all)
     @total_current_pages = Tracker.where(reading_list_id: @reading_lists_all).sum(:current_page)
