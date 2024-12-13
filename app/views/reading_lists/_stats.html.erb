@@ -1,7 +1,7 @@
 <% if @tracker.blank? %>
   <p>Not tracked yet</p>
 <% else %>
-  <p>Current page at: <%= @tracker.current_page %></p>
+  <p>Current page: <%= @tracker.current_page %></p>
   <p>Total time spent:
     <%= @tracker.total_minutes_spent / 3600 %> Hours,
     <%= (@tracker.total_minutes_spent % 3600) / 60 %> Minutes,
@@ -27,6 +27,6 @@
   <%= column_chart @reading_sessions_done
                       .group_by_day_of_week(:session_start, format: "%a")
                       .average(:page_count).map { |k, v| [k, v.to_i] },
-                      ytitle: "average page red" %>
+                      ytitle: "average page read" %>
 
 <% end %>
