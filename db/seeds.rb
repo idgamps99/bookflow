@@ -5,9 +5,16 @@
 # You can manually seed by clicking on results in the index page
 # ^^^ each time you go to show page it will create a new instance of book, unless it exists already in the DB
 
+puts "Destroying all previous records..."
+Book.destroy_all
+User.destroy_all
+
+puts "destroyed all previous records"
+
+# Seed books from Google Books API
 # Top 100ish books
 books = [
-  ["To Kill a Mockingbird", 4.8, "Fiction"],
+  #    ["To Kill a Mockingbird", 4.8, "Fiction"],
   ["1984", 4.7, "Dystopian"],
   ["Pride and Prejudice", 4.6, "Romance"],
   ["The Great Gatsby", 4.5, "Classic"],
@@ -19,7 +26,7 @@ books = [
   ["Jane Eyre", 4.6, "Romance"],
   ["Brave New World", 4.4, "Dystopian"],
   ["Wuthering Heights", 4.2, "Romance"],
-  ["Les Misérables", 4.8, "Historical"],
+  #   ["Les Misérables", 4.8, "Historical"],
   ["Fahrenheit 451", 4.6, "Dystopian"],
   ["The Alchemist", 4.5, "Philosophical"],
   ["The Lord of the Rings", 5.0, "Fantasy"],
@@ -106,23 +113,124 @@ books = [
 
 puts "Seeding books..."
 # There are some issues with this. It won't seed all of them - not every search result h
+#  for i in 0...books.length do
+#    if !Book.exists?(title: books[i][0])
+#      url = "https://www.googleapis.com/books/v1/volumes?q=#{(books[i][0])}&key=#{ENV["GOOGLE_API_KEY"]}"
+#      response = URI.parse(url).read
+#      data = JSON.parse(response)
+#      Book.create!(
+#        title: books[i][0],
+#        author: data.dig("items", 0, "volumeInfo", "authors", 0) || "Unknown Author",
+#        year_published: data["items"][0]["volumeInfo"]["publishedDate"],
+#        summary: data["items"][0]["volumeInfo"]["description"],
+#        page_count: data["items"][0]["volumeInfo"]["pageCount"],
+#        cover_url: data["items"][0]["volumeInfo"]["imageLinks"]&.dig("smallThumbnail"),
+#        key: data["items"][0]["id"],
+#        overall_rating: books[i][1],
+#        genre: books[i][2]
+#      )
+#    end
+#  end
+selected_book = nil # Placeholder to track one book for tracker creation
+
 for i in 0...books.length do
   if !Book.exists?(title: books[i][0])
-    url = "https://www.googleapis.com/books/v1/volumes?q=#{(books[i][0])}&key=#{ENV["GOOGLE_API_KEY"]}"
-    response = URI.parse(url).read
-    data = JSON.parse(response)
-    Book.create!(
-      title: books[i][0],
-      author: data.dig("items", 0, "volumeInfo", "authors", 0) || "Unknown Author",
-      year_published: data["items"][0]["volumeInfo"]["publishedDate"],
-      summary: data["items"][0]["volumeInfo"]["description"],
-      page_count: data["items"][0]["volumeInfo"]["pageCount"],
-      cover_url: data["items"][0]["volumeInfo"]["imageLinks"]&.dig("smallThumbnail"),
-      key: data["items"][0]["id"],
-      overall_rating: books[i][1],
-      genre: books[i][2]
-    )
+    url = "https://www.googleapis.com/books/v1/volumes?q=#{(books[i][0])}&key=#{ENV['GOOGLE_API_KEY']}"
+
+    begin
+      response = URI.open(url).read
+      data = JSON.parse(response)
+
+      # Skip the book if no results are found
+      if data["totalItems"] > 0
+        first_result = data["items"][0]["volumeInfo"]
+
+        created_book = Book.create!(
+          title: books[i][0],
+          author: first_result.dig("authors", 0) || "Unknown Author",
+          year_published: first_result["publishedDate"],
+          summary: first_result["description"],
+          page_count: first_result["pageCount"],
+          cover_url: first_result.dig("imageLinks", "smallThumbnail"),
+          key: data["items"][0]["id"],
+          overall_rating: books[i][1],
+          genre: books[i][2]
+        )
+
+        # Use the first seeded book for tracker and sessions
+        selected_book ||= created_book
+      else
+        puts "No results found for '#{books[i][0]}'"
+      end
+    rescue => e
+      puts "Error processing '#{books[i][0]}': #{e.message}"
+    end
   end
 end
 
+puts "Book selection: #{selected_book&.title || 'None'}"
 puts "Books seeded!"
+
+if selected_book
+  # Create a user for testing purposes
+  user = User.create!(
+    email: 'testuser@example.com',
+    password: 'password', # Replace with hashed password
+    first_name: 'John',
+    last_name: 'Doe',
+    username: 'johndoe'
+  )
+
+  # Create a reading list for the selected book
+  reading_list = ReadingList.create!(
+    user: user,
+    book: selected_book,
+    active: true
+  )
+
+  # Create a tracker for the reading list
+  tracker = Tracker.create!(
+    reading_list: reading_list,
+    current_page: 250,
+    total_minutes_spent: 300,
+    reading_status: 'In progress'
+  )
+
+  # Create reading sessions for the tracker
+  7.times do |i|
+    start_time = Time.current - (i + 1).days
+    duration = rand(10..60)*60 # Random duration between 10 and 60 minutes
+    ReadingSession.create!(
+      tracker: tracker,
+      duration: duration,
+      session_start: start_time,
+      session_end: start_time + duration, # Matches random duration
+      page_count: rand(10..60), # Random page count between 10 and 60
+      active: false
+    )
+  end
+
+  puts "Tracker and reading sessions created for the book: #{selected_book.title}"
+
+  # Create reviews from other users for the selected book
+  5.times do |i|
+    other_user = User.create!(
+      email: "user#{i + 1}@example.com",
+      password: 'password',
+      first_name: "User#{i + 1}",
+      last_name: "Reviewer#{i + 1}",
+      username: "user#{i + 1}"
+    )
+
+    # Create a review for the selected book by the user
+    Review.create!(
+      user: other_user,
+      book: selected_book,
+      rating: rand(1.0..5.0).round(1),
+      title: "Review by #{other_user.username}",
+      content: "This is a review by #{other_user.username}. I think this book is #{['amazing', 'great', 'good', 'average', 'not great'].sample}!"
+    )
+  end
+
+  puts "Reviews created for the book: #{selected_book.title}"
+end
