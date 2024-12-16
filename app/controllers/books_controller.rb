@@ -22,6 +22,7 @@ class BooksController < ApplicationController
     else
       @book = show_page_search(params[:key])
     end
+    @reviews = @book.reviews
   end
 
   def genres_index
