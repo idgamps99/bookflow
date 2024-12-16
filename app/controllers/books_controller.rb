@@ -3,7 +3,6 @@ require "open-uri"
 
 class BooksController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
-  # before_action :genres_initialise, only: [:genres_index]
 
   def index
     # Returns books in DB if no search queries present
@@ -30,11 +29,20 @@ class BooksController < ApplicationController
   end
 
   def genres_index
-    @genres = { Fantasy: [], Novels: [], Romance: [], Thriller: [], Mystery: [], Crime: [] }
-    @genres.each do |key, value|
-      value.concat(genre_search(key.to_s))
-    end
+    @genres = genre_dispatch
     # @genres = Rails.cache.read('genres')
+  end
+
+def genre_dispatch
+  Rails.cache.fetch("#{current_user.cache_key_with_version}/content") do
+
+  genres = { Fantasy: [], Novels: [], Romance: [], Thriller: [], Mystery: [], Crime: [] }
+  genres.each do |key, value|
+    value.concat(genre_search(key.to_s))
+  end
+  genres
+end
+
   end
 
   private
@@ -70,20 +78,16 @@ class BooksController < ApplicationController
   end
 
   def base_search(query, url)
-    books = []
-    response = URI.parse(url).read
-    data = JSON.parse(response)
-    data["items"].each do |d|
-      book = Book.new
-      cover_url =  d["volumeInfo"]["imageLinks"]&.dig("smallThumbnail")
-      book[:cover_url] = cover_url
-      book.key = d["id"]
-      books << book
-    end
-    books
+      books = []
+      response = URI.parse(url).read
+      data = JSON.parse(response)
+      data["items"].each do |d|
+        book = Book.new
+        cover_url =  d["volumeInfo"]["imageLinks"]&.dig("smallThumbnail")
+        book[:cover_url] = cover_url
+        book.key = d["id"]
+        books << book
+      end
+      books
   end
-
-  # def genres_initialise
-  #   FetchGenresJob.perform_now
-  # end
 end

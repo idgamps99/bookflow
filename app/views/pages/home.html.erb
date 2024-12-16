@@ -94,19 +94,19 @@
     </div>
   </div>
 
-  <div class="book-section">
+  <div class="genres">
     <h3>Today's Top Picks</h3>
-    <div class="books">
+    <div class="genre-buttons">
       <% @top_picks.each do |book| %>
-        <div class="book-card">
+        <div class="genre-container">
           <% if book.cover_url.present? %>
-            <div class="book-cover-container">
+            <div class="genre-button">
               <%= link_to book_path(book) do %>
                 <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
               <% end %>
             </div>
           <% else %>
-            <div class="book-cover-container">
+            <div class="genre-button">
               <%= link_to book_path(book) do %>
                 <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
               <% end %>
@@ -119,3 +119,4 @@
       <% end %>
     </div>
   </div>
+</div>

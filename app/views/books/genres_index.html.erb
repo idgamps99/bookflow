@@ -2,9 +2,9 @@
   <div class="genres">
     <h3><%= key %></h3>
     <div class="genre-buttons">
-      <div class="genre-container">
 
         <% value.each do |book| %>
+      <div class="genre-container">
 
           <% if book.cover_url.present? %>
             <div class="genre-button">
@@ -22,7 +22,7 @@
             </div>
 
           <% end %>
-          
+
         </div>
       <% end %>
     </div>
