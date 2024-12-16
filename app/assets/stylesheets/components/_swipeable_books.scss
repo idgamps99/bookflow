@@ -1,36 +1,29 @@
 .swipeable-book-section {
-  margin: 10px;
+  margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
 }
 
 .swipeable-section-title {
-  text-align: left;
   font-size: 24px;
+  text-align: left;
   margin-bottom: 15px;
 }
 
 .swipeable-books {
-  display: flex; /* Flexbox for horizontal layout */
-  gap: 20px; /* Space between cards */
-  overflow-x: auto; /* Horizontal scrolling */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling for touch devices */
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
   padding-bottom: 10px;
-
-  /* Hide scrollbar for Webkit browsers */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for Firefox */
-  scrollbar-width: none;
 }
 
 .swipeable-book-card {
-  flex: 0 0 auto; /* Prevent shrinking and set fixed width */
-  text-align: center;
-  width: 100%;
+  flex: 0 0 auto;
   max-width: 150px;
+  box-sizing: border-box;
+  text-align: center;
+  scroll-snap-align: start;
 }
 
 .swipeable-book-cover-container {
@@ -41,15 +34,23 @@
   align-items: center;
   background-color: #f0f0f0;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 .swipeable-book-cover {
   width: 100%;
-  height: auto;
-  border-radius: 5px;
+  height: 100%;
   object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  border-radius: 5px;
 }
+
+.swipeable-book-card h4 {
+  font-size: 16px;
+  margin: 10px 0 5px;
+}
+
+.swipeable-book-card p {
+  font-size: 14px;
+  color: #555;
+}
+

@@ -3,6 +3,7 @@ require "open-uri"
 
 class BooksController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
+  # before_action :genres_initialise, only: [:genres_index]
 
   def index
     # Returns books in DB if no search queries present
@@ -33,6 +34,7 @@ class BooksController < ApplicationController
     @genres.each do |key, value|
       value.concat(genre_search(key.to_s))
     end
+    # @genres = Rails.cache.read('genres')
   end
 
   private
@@ -80,4 +82,8 @@ class BooksController < ApplicationController
     end
     books
   end
+
+  # def genres_initialise
+  #   FetchGenresJob.perform_now
+  # end
 end
