@@ -62,13 +62,17 @@
       </div>
 
   </div>
-      <div class="bf-sessions text-center">
+      <div class="bf-sessions text-center" >
         <% if @reading_session.present? && @reading_session.active %>
+          <div data-controller="stopwatch">
 
-<!--
-          <p><small>Session is still ongoing</small></p>
-          <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M:%S") %>
--->
+            <p><small>Session is still ongoing</small></p>
+            <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M:%S") %>
+
+            <p data-stopwatch-target="timer">00:00</p>
+
+          </div>
+
           <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
             <%= form.label :page_count, "Enter new page number" %>
             <%= form.number_field :page_count, value: @tracker.current_page %>
@@ -80,7 +84,9 @@
       </div>
 
 
-
     <% end %>
 
 </div>
+
+
+a
