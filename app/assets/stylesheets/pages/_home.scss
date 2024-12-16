@@ -1,4 +1,3 @@
-// Specific CSS for your home-page
 .main-banner-container {
   border-radius: 10px;
   overflow: hidden;
@@ -76,7 +75,17 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  gap: 24px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0;
 }
+
+.genre-buttons::-webkit-scrollbar {
+  display: none;
+}
+
 
 .genre-button {
   display: block;
@@ -94,6 +103,9 @@
 .genre-container {
   text-align: center;
   margin-top: 7px;
+  flex: 0 0 auto;
+  text-align: center;
+  scroll-snap-align: start;
 }
 
 .genre-name {
