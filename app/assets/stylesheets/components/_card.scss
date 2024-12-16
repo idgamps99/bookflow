@@ -1,0 +1,60 @@
+$card-bg-color: #f9f9f9;
+$card-hover-bg-color: #ffffff;
+$card-border-radius: 12px;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+$text-color: #666;
+$linear-color: linear-gradient(90deg, #e49933, #e36f08);
+
+
+.bf-card {
+  background-color: $card-bg-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow;
+
+  .bf-text-box {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+.bf-text {
+  border-bottom: 1px solid #000000;
+
+  p {
+    margin: 16px 0 0 0;
+  }
+}
+
+#bf-text-title {
+  margin-bottom: 0px;
+}
+
+#bf-text-author {
+  margin-top: 0px;
+}
+// .bf-card-gray {
+
+// }
+
+// .bf-card-bg-gray {
+
+// }
+
+.bf-card-img {
+  height: 320px;
+}
+
+.bf-progress {
+  background-color: #e1e1e1;
+  border-radius: 5px;
+  height: 18px;
+  overflow: hidden;
+
+  .bf-progress-bar {
+    background: $linear-color;
+    height: 100%;
+    border-radius: 5px;
+  }
+}

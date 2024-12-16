@@ -31,14 +31,16 @@
   </div> -->
 
 <% if current_user.reading_lists.where(book_id: @book.id, active: true).exists? %>
-  <p><%= "Added" %></p>
-  <% if @reading_list.active %>
-    <%= "Tracking in Progress" %>
-  <% else %>
-    <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
-  <% end %>
+  <div>
+    <p><%= "Added" %></p>
+    <% if @reading_list.active %>
+      <%= link_to "Go to Tracker", reading_list_path(@reading_list) %>
+    <% else %>
+      <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
+    <% end %>
+  </div>
 <% else %>
-  <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action:"click->reading-list-session-button#fireReview", turbo_method: :post } %>
+  <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { turbo_method: :post } %>
 <% end %>
 <h3>Reviews</h3>
 
