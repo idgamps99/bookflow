@@ -1,18 +1,12 @@
 // Variables
-$card-bg-color: #f9f9f9;
-$card-hover-bg-color: #ffffff;
 $card-border-radius: 12px;
-$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-$box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
-$text-color: #666;
-$linear-color: linear-gradient(90deg, #e49933, #e36f08);
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
 // Container for the cards
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
-  margin-top: 20px;
 }
 
 // Card styles
@@ -20,54 +14,77 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: $card-bg-color;
+  justify-content: flex-start;
   border-radius: $card-border-radius;
   box-shadow: $box-shadow;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
-  height: 350px;
+  height: auto;
   padding: 16px;
   margin: 15px;
 
   // Image styling
-  .book-cover {
-    width: 120px;
-    height: auto;
-    margin-bottom: 16px;
-    border-radius: 8px;
+  .activity-cover {
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
   }
 
   // Text styling
-  .card-details {
+  .activity-details {
     text-align: center;
 
-    .book-title {
-      font-size: 18px;
+    .activity-title {
       font-weight: bold;
-      margin: 0;
     }
 
-    .book-author {
+    .activity-author {
       font-size: 14px;
-      color: $text-color;
       margin-top: 4px;
+      color: #666;
+    }
+  }
+}
+
+.progress {
+  background-color: #e1e1e1;
+  border-radius: 5px;
+  height: 15px;
+  width: 300px;
+  overflow: hidden;
+
+  .progress-bar {
+    background: linear-gradient(90deg, #e49933, #e36f08);
+    height: 100%;
+    border-radius: 5px;
+  }
+}
+
+.activity-info {
+  color: #666;
+  margin-top: 14px;
+  font-size: 14px;
+
+  .activity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .activity-time {
+    width: 300px;
+    padding: 8px 0;
+
+    p {
+      margin: 0;
     }
   }
 
-  .progress {
-    background-color: #e1e1e1;
-    border-radius: 5px;
-    height: 15px;
-    width: 200px;
-    overflow: hidden;
-
-    .progress-bar {
-      background: $linear-color;
-      height: 100%;
-      border-radius: 5px;
-    }
+  .activity-pages {
+    width: 300px;
+    padding: 8px 0;
+    border-top: 1px solid #666;
   }
 }

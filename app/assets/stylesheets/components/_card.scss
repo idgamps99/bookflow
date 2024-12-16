@@ -1,0 +1,70 @@
+$card-bg-color: #f9f9f9;
+$card-hover-bg-color: #ffffff;
+$card-border-radius: 12px;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+$text-color: #666;
+$linear-color: linear-gradient(90deg, #e49933, #e36f08);
+
+
+.bf-card {
+  background-color: $card-bg-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow;
+
+  .bf-text-box {
+    width: 90%;
+    text-align: center;
+    margin: 20px auto;
+    color: #666;
+    font-size: 14px;
+
+  }
+}
+
+.bf-text-pages {
+  border-top: 1px solid #666;
+  padding: 8px 0;
+
+  p {
+    margin: 12px 0 0 0;
+  }
+}
+
+#bf-text-title {
+  margin-bottom: 0px;
+}
+
+#bf-text-author {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #666;
+  margin-bottom: 0px;
+}
+// .bf-card-gray {
+
+// }
+
+// .bf-card-bg-gray {
+
+// }
+
+.bf-card-img {
+  height: 300px;
+}
+
+.bf-progress {
+  background-color: #e1e1e1;
+  border-radius: 5px;
+  height: 18px;
+  width: 90%;
+  overflow: hidden;
+  text-align: center;
+  margin: 20px auto;
+
+  .bf-progress-bar {
+    background: $linear-color;
+    height: 100%;
+    border-radius: 5px;
+  }
+}
