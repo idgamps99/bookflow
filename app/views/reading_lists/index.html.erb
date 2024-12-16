@@ -1,7 +1,8 @@
-<h2>Library</h2>
 
-<<<<<<< HEAD
+
+
 <div class="index-container">
+  <h2>Library</h2>
   <div class="book-section">
     <% if @reading_lists.empty? %>
       <p>There are no Books yet.</p>
@@ -25,25 +26,13 @@
           </div>
         <% end %>
       </div>
-=======
-<% if @reading_lists.empty? %>
-  <p>There are no Books yet.</p>
-<% else %>
-  <ul>
-    <% @reading_lists.each do |reading_list| %>
-      <li><%= reading_list.book.title  %> <%= link_to "show", book_path(reading_list.book) %></li>
->>>>>>> master
     <% end %>
   </div>
 </div>
 
-<!--
-
 <h2>Books Read</h2>
-<ul>
+<div class="">
   <% @reading_lists_done.each do |done| %>
     <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
   <% end %>
 </ul>
-
--->
