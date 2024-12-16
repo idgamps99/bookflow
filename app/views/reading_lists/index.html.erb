@@ -6,12 +6,12 @@
 <% else %>
   <ul>
     <% @reading_lists.each do |reading_list| %>
-      <li><%= reading_list.book.title  %> <%= link_to "show", reading_list_path(reading_list) %></li>
+      <li><%= reading_list.book.title  %> <%= link_to "show", book_path(reading_list.book) %></li>
     <% end %>
   </ul>
 <% end %>
 
-<%= link_to "Back", books_path %>
+<!--
 
 <h2>Books Read</h2>
 <ul>
@@ -19,3 +19,5 @@
     <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
   <% end %>
 </ul>
+
+-->

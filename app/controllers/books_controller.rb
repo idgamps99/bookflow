@@ -22,6 +22,7 @@ class BooksController < ApplicationController
     else
       @book = show_page_search(params[:key])
     end
+    @reading_list = current_user.reading_lists.find_by(book_id: @book.id)
   end
 
   def genres_index
