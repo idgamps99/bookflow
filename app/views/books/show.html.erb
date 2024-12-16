@@ -19,8 +19,6 @@
     </div>
   </div>
 
-  <p><strong>Summary:</strong></p>
-  <p class="book-detail-summary"><%= @book.summary %></p>
 <!--
   <div id="reading-list-actions" data-controller="reading-list-session-button">
     <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action:"click->reading-list-session-button#fireReview", turbo_method: :post } %>
@@ -31,17 +29,20 @@
   </div> -->
 
 <% if current_user.reading_lists.where(book_id: @book.id, active: true).exists? %>
-  <div>
-    <p><%= "Added" %></p>
-    <% if @reading_list.active %>
-      <%= link_to "Go to Tracker", reading_list_path(@reading_list) %>
-    <% else %>
-      <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
-    <% end %>
+  <div class="d-flex justify-content-between">
+    <!-- <p><%= "Added" %></p> -->
+    <%= button_to "Remove from My Books", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }, class: "book-detail-leave-review-btn"  %>
+    <%= link_to "Go to Tracker", reading_list_path(@reading_list), class: "book-detail-add-button text-decoration-none" %>
   </div>
 <% else %>
   <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { turbo_method: :post } %>
 <% end %>
+
+
+  <p><strong>Summary:</strong></p>
+  <p class="book-detail-summary"><%= @book.summary %></p>
+
+
 <h3>Reviews</h3>
 
   <!-- Review Form Toggle -->
