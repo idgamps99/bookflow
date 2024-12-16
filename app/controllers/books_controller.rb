@@ -12,8 +12,9 @@ class BooksController < ApplicationController
     if params[:query].present?
       @books = title_search(params[:query])
     elsif params[:genre_query].present?
+      session[:genre] = params[:genre_query]
       @books = genre_search(params[:genre_query])
-  end
+    end
   end
 
   def show
@@ -23,7 +24,7 @@ class BooksController < ApplicationController
       @book.summary = strip_tags(@book.summary)
       @book
     else
-      @book = show_page_search(params[:key])
+      @book = show_page_search(params[:key], session[:genre])
     end
   end
 
@@ -38,7 +39,7 @@ class BooksController < ApplicationController
 
   # Pls don't touch this or i will cry
   # TODO: still don't have a rating when you create a new book
-  def show_page_search(key)
+  def show_page_search(key, genre)
     url = "https://www.googleapis.com/books/v1/volumes/#{key}?key=#{ENV['GOOGLE_API_KEY']}"
     response = URI.parse(url).read
     data = JSON.parse(response)
@@ -49,7 +50,8 @@ class BooksController < ApplicationController
       summary: strip_tags(data["volumeInfo"]["description"]),
       page_count: data["volumeInfo"]["pageCount"],
       cover_url: data["volumeInfo"]["imageLinks"]&.dig("smallThumbnail"),
-      key: key
+      key: key,
+      genre: genre
     )
   end
 
