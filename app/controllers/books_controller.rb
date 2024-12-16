@@ -31,18 +31,17 @@ class BooksController < ApplicationController
 
   def genres_index
     @genres = genre_dispatch
-    # @genres = Rails.cache.read('genres')
+
   end
 
-def genre_dispatch
-  Rails.cache.fetch("#{current_user.cache_key_with_version}/content") do
-
-  genres = { Fantasy: [], Novels: [], Romance: [], Thriller: [], Mystery: [], Crime: [] }
-  genres.each do |key, value|
-    value.concat(genre_search(key.to_s))
+  def genre_dispatch
+    Rails.cache.fetch("#{current_user.cache_key_with_version}/content") do
+    genres = { Fantasy: [], Novels: [], Romance: [], Thriller: [], Mystery: [], Crime: [] }
+    genres.each do |key, value|
+      value.concat(genre_search(key.to_s))
+    end
+    genres
   end
-  genres
-end
 
   end
 
