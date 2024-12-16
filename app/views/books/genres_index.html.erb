@@ -1,24 +1,24 @@
 <% @genres.each do |key, value| %>
-  <div class="book-section">
-    <h3><%= key %></h3>
-    <div class="books">
+  <div class="swipeable-book-section">
+    <h3 class="swipeable-section-title"><%= key %></h3>
+    <div class="swipeable-books">
       <% value.each do |book| %>
-        <div class="book-card">
+        <div class="swipeable-book-card">
           <% if book.cover_url.present? %>
-            <div class="book-cover-container">
+
               <%= link_to book_path(book) do %>
-                <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
+                <%= image_tag book.cover_url, alt: book.title, class: "swipeable-book-cover" %>
               <% end %>
-            </div>
+           
           <% else %>
-            <div class="book-cover-container">
+
               <%= link_to book_path(book) do %>
-                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'swipeable-book-cover' %>
               <% end %>
-            </div>
+
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
-  <% end %>
+<% end %>
