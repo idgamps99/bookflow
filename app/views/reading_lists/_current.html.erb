@@ -1,29 +1,120 @@
-<h2><%= @reading_list.book.title %></h2>
-<h3><%= @reading_list.book.author %></h3>
-<%= image_tag @reading_list.book.cover_url %>
-
-<%= button_to "delete", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
-
-<p>tracker</p>
-<% if @tracker.blank? %>
-  <p>Not tracked yet</p>
-  <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
-<% else %>
-  <%= @tracker.current_page %>
-  <%= @tracker.total_minutes_spent %>
-  <%= Time.at(@tracker.total_minutes_spent).utc.strftime("%H:%M:%S") %>
+<div class="container">
 
 
-  <% if @reading_session.present? && @reading_session.active %>
-    <p>Session is still ongoing</p>
-    <%= @reading_session.session_start %>
-    <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
-      <%= form.number_field :page_count, value: @tracker.current_page %>
-      <%= form.submit "End Session" %>
+  <%= button_to "Remove from List", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
+  <div class="card p-2 text-center m-3 bf-card">
+    <div class="">
+      <%= image_tag @reading_list.book.cover_url, class: "bf-card-img mt-2" %>
+    </div>
+    <div>
+      <h1 id="bf-text-title"><%= @reading_list.book.title %></h1>
+      <p id="bf-text-author"><%= @reading_list.book.author %></p>
+
+      <!-- <div class="d-flex justify-content-between">
+        <p><strong>Published Year:</strong> <%= @reading_list.book.year_published %></p>
+        <p><strong>Genre:</strong> <%= @reading_list.book.genre %></p>
+        <p><strong>Page Count:</strong> <%= @reading_list.book.page_count %> pages</p>
+      </div> -->
+
+      <!--
+      <p>
+        <strong>Overall Rating:</strong>
+        <i class="fas fa-star" style="color: #FFD700;"></i>
+        <%= @reading_list.book.overall_rating == @reading_list.book.overall_rating ? @reading_list.book.overall_rating : number_with_precision(@reading_list.book.overall_rating, precision: 1) %>
+        / 5
+      </p>
+      -->
+    </div>
+
+
+
+
+    <% if @tracker.blank? %>
+      <p>Not tracked yet</p>
+      <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
+    <% else %>
+
+      <!-- Progress bar -->
+      <div class="bf-progress">
+        <% total_pages = @reading_list.book.page_count %>
+        <% current_page = @tracker.current_page %>
+        <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
+
+
+        <div class="bf-progress-bar"
+          role="progressbar"
+          aria-valuenow="<% progress_percentage %>"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          style="width: <%= progress_percentage %>%;"><%= progress_percentage %>%
+        </div>
+      </div>
+
+      <div class="bf-text-box">
+        <div class="d-flex justify-content-between bf-text-time">
+          <p>Time spent: </p>
+          <p><strong><%= Time.at(@tracker.total_minutes_spent).utc.strftime("%H:%M:%S") %></strong></p>
+        </div>
+        <div class="d-flex justify-content-between bf-text-pages">
+          <p>Current Page:</p>
+          <p><strong><%= @tracker.current_page %></strong></p>
+        </div>
+      </div>
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+      <div class="bf-sessions text-center" >
+        <% if @reading_session.present? && @reading_session.active %>
+
+          <%# <p><small>Session is still ongoing</small></p> %>
+
+          <div data-controller="stopwatch">
+            <p data-stopwatch-target="timer">00:00</p>
+          </div>
+
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SessionEndModal">
+            End Session
+          </button>
+
+          <div class="modal fade" id="SessionEndModal" tabindex="-1" aria-labelledby="SessionEndModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="SessionEndModalLabel">Session End</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Started at:</p>
+                    <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M") %>
+                    <p>Enter new page number to end session</p>
+                  <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
+                    <%= form.number_field :page_count, value: @tracker.current_page %>
+                    <%= form.submit "End Session" %>
+                  <% end %>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        <% else %>
+          <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }%>
+        <% end %>
+      </div>
+
+
     <% end %>
-  <% else %>
-    <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }%>
-  <% end %>
 
-
-<% end %>
+</div>
