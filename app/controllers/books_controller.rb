@@ -2,6 +2,8 @@ require "json"
 require "open-uri"
 
 class BooksController < ApplicationController
+  include ActionView::Helpers::SanitizeHelper
+
   def index
     # Returns books in DB if no search queries present
     @books = Book.all
@@ -18,6 +20,7 @@ class BooksController < ApplicationController
     @review = Review.new
     # Return instance of book if already in DB, else create a new instance for that book
     if @book = Book.find_by(key: params[:key])
+      @book.summary = strip_tags(@book.summary)
       @book
     else
       @book = show_page_search(params[:key])
@@ -43,7 +46,7 @@ class BooksController < ApplicationController
       title: data["volumeInfo"]["title"],
       author: data["volumeInfo"]["authors"][0],
       year_published: data["volumeInfo"]["publishedDate"],
-      summary: data["volumeInfo"]["description"],
+      summary: strip_tags(data["volumeInfo"]["description"]),
       page_count: data["volumeInfo"]["pageCount"],
       cover_url: data["volumeInfo"]["imageLinks"]&.dig("smallThumbnail"),
       key: key
