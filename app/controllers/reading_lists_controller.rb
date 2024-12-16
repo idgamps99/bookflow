@@ -43,6 +43,7 @@ class ReadingListsController < ApplicationController
 
   private
 
+  # comment
   def set_reading_list
     @reading_list = ReadingList.find(params[:id])
   end

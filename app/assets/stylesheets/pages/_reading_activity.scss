@@ -1,0 +1,90 @@
+// Variables
+$card-border-radius: 12px;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+// Container for the cards
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+// Card styles
+.session-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  height: auto;
+  padding: 16px;
+  margin: 15px;
+
+  // Image styling
+  .activity-cover {
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  // Text styling
+  .activity-details {
+    text-align: center;
+
+    .activity-title {
+      font-weight: bold;
+    }
+
+    .activity-author {
+      font-size: 14px;
+      margin-top: 4px;
+      color: #666;
+    }
+  }
+}
+
+.progress {
+  background-color: #e1e1e1;
+  border-radius: 5px;
+  height: 15px;
+  width: 300px;
+  overflow: hidden;
+
+  .progress-bar {
+    background: linear-gradient(90deg, #e49933, #e36f08);
+    height: 100%;
+    border-radius: 5px;
+  }
+}
+
+.activity-info {
+  color: #666;
+  margin-top: 14px;
+  font-size: 14px;
+
+  .activity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .activity-time {
+    width: 300px;
+    padding: 8px 0;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .activity-pages {
+    width: 300px;
+    padding: 8px 0;
+    border-top: 1px solid #666;
+  }
+}

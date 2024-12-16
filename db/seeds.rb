@@ -6,6 +6,10 @@
 # ^^^ each time you go to show page it will create a new instance of book, unless it exists already in the DB
 
 puts "Destroying all previous records..."
+ReadingSession.destroy_all
+Tracker.destroy_all
+Review.destroy_all
+ReadingList.destroy_all
 Book.destroy_all
 User.destroy_all
 
@@ -192,7 +196,7 @@ if selected_book
   tracker = Tracker.create!(
     reading_list: reading_list,
     current_page: 250,
-    total_minutes_spent: 300,
+    # total_minutes_spent: 300,
     reading_status: 'In progress'
   )
 
