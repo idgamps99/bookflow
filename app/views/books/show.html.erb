@@ -8,7 +8,9 @@
       <p>by <%= @book.author %></p>
       <br>
       <p><strong>Published Year:</strong> <%= @book.year_published %></p>
-      <p><strong>Genre:</strong> <%= @book.genre %></p>
+      <% unless @book.genre.nil? %>
+        <p><strong>Genre:</strong> <%= @book.genre %></p>
+      <% end %>
       <p><strong>Page Count:</strong> <%= @book.page_count %> pages</p>
       <p>
         <strong>Overall Rating:</strong>

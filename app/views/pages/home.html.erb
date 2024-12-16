@@ -44,48 +44,43 @@
         <% end %>
         <div class="genre-name">Thriller</div>
       </div>
+
+      <div class="genre-container">
+        <%= link_to books_path(genre_query: "Romance"), class: "genre-button" do %>
+          <%= image_tag("Discover/Romance Cover.png", alt: "Romance", class: "genre-image") %>
+        <% end %>
+        <div class="genre-name">Horror</div>
+      </div>
+
+      <div class="genre-container">
+        <%= link_to books_path(genre_query: "Romance"), class: "genre-button" do %>
+          <%= image_tag("Discover/Romance Cover.png", alt: "Romance", class: "genre-image") %>
+        <% end %>
+        <div class="genre-name">Dystopian</div>
+      </div>
+
+      <div class="genre-container">
+        <%= link_to books_path(genre_query: "Romance"), class: "genre-button" do %>
+          <%= image_tag("Discover/Romance Cover.png", alt: "Romance", class: "genre-image") %>
+        <% end %>
+        <div class="genre-name">Sci-fi</div>
+      </div>
     </div>
   </div>
 
-  <div class="book-section">
-  <h3>Recommendations</h3>
-  <div class="books">
-    <% @recommended_books.each do |book| %>
-      <div class="book-card">
-        <% if book.cover_url.present? %>
-          <div class="book-cover-container">
-            <%= link_to book_path(book) do %>
-              <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="book-cover-container">
-            <%= link_to book_path(book) do %>
-              <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
-            <% end %>
-          </div>
-        <% end %>
-        <p class="book-rating">
-          <%= book.overall_rating.present? ? "<i class='fas fa-star' style='color: #FFD700;'></i> #{number_with_precision(book.overall_rating, precision: 1)}".html_safe : "<i class='fas fa-star' style='color: #FFD700;'></i> n/a".html_safe %>
-        </p>
-      </div>
-    <% end %>
-  </div>
-  </div>
-
-  <div class="book-section">
-    <h3>Today's Top Picks</h3>
-    <div class="books">
-      <% @top_picks.each do |book| %>
-        <div class="book-card">
+  <div class="genres">
+    <h3>Recommendations</h3>
+    <div class="genre-buttons">
+      <% @recommended_books.each do |book| %>
+        <div class="genre-container">
           <% if book.cover_url.present? %>
-            <div class="book-cover-container">
+            <div class="genre-button">
               <%= link_to book_path(book) do %>
                 <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
               <% end %>
             </div>
           <% else %>
-            <div class="book-cover-container">
+            <div class="genre-button">
               <%= link_to book_path(book) do %>
                 <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
               <% end %>
@@ -98,3 +93,30 @@
       <% end %>
     </div>
   </div>
+
+  <div class="genres">
+    <h3>Today's Top Picks</h3>
+    <div class="genre-buttons">
+      <% @top_picks.each do |book| %>
+        <div class="genre-container">
+          <% if book.cover_url.present? %>
+            <div class="genre-button">
+              <%= link_to book_path(book) do %>
+                <%= image_tag book.cover_url, alt: book.title, class: "book-cover" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="genre-button">
+              <%= link_to book_path(book) do %>
+                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+              <% end %>
+            </div>
+          <% end %>
+          <p class="book-rating">
+            <%= book.overall_rating.present? ? "<i class='fas fa-star' style='color: #FFD700;'></i> #{number_with_precision(book.overall_rating, precision: 1)}".html_safe : "<i class='fas fa-star' style='color: #FFD700;'></i> n/a".html_safe %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
