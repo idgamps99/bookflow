@@ -1,11 +1,36 @@
-.nav-pills .nav-link {
-  &.active {
-    background: linear-gradient(90deg, #e49933, #e36f08); // Change to your desired background color
-    color: #ffffff; // Change to your desired text color
+// Tabs
+.activity-top {
+  padding: 16px;
+}
+
+.nav-pills {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5;
+  gap: 16px;
+
+  .nav-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
 
-  &:not(.active) {
-    background-color: #f8f9fa; // Default background for inactive buttons
-    color: #333; // Default text color for inactive buttons
+  .nav-link {
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    height: 55px;
+    padding: 5px;
+
+    &.active {
+      background: linear-gradient(90deg, #e49933, #e36f08);
+      color: #ffffff;
+    }
+
+    &:not(.active) {
+      background-color: #f8f9fa;
+      color: #333;
+    }
   }
 }

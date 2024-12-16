@@ -1,11 +1,12 @@
-<p>List of books currently being tracked.</p>
 <div class="activity-card-container">
   <% @trackers.each do |t| %>
     <%= link_to reading_list_path(t.reading_list), class: "session-card" do %>
+    <div class="activity-cover">
       <%= image_tag t.reading_list.book.cover_url %>
-      <div class="activity-card-details">
-        <h3><%= t.reading_list.book.title %></h3>
-        <p><%= t.reading_list.book.author %></p>
+    </div>
+      <div class="activity-details">
+        <h3 class="activity-title"><%= t.reading_list.book.title %></h3>
+        <p class="activity-author"><%= t.reading_list.book.author %></p>
       </div>
 
       <!-- Progress bar -->
@@ -14,7 +15,6 @@
         <% current_page = t.current_page %>
         <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
 
-
         <div class="progress-bar"
             role="progressbar"
             aria-valuenow="<% progress_percentage %>"
@@ -22,6 +22,18 @@
             aria-valuemax="100"
             style="width: <%= progress_percentage %>%;"><%= progress_percentage %>%
           </div>
+      </div>
+
+      <!-- Details -->
+      <div class="activity-info">
+        <div class="activity-row activity-time">
+          <p>Time:</p>
+          <p><%= Time.at(t.total_minutes_spent).utc.strftime("%H:%M:%S") %></p>
+        </div>
+        <div class="activity-row activity-pages">
+          <p>Pages:</p>
+          <p><%= t.current_page %></p>
+        </div>
       </div>
     <% end %>
   <% end %>
