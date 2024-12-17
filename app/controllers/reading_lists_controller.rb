@@ -21,7 +21,7 @@ class ReadingListsController < ApplicationController
 
     if @reading_list.save
       respond_to do |format|
-        format.html { redirect_to @book, notice: "Book successfully added to your reading list." }
+        format.html { redirect_to @book}
         format.js   # Trigger JS response for dynamic update
       end
     else
@@ -29,7 +29,7 @@ class ReadingListsController < ApplicationController
       @reading_list.active = true
       @reading_list.save
       respond_to do |format|
-        format.html { redirect_to @book, alert: "Book has been reactivated." }
+        format.html { redirect_to @book }
         format.js   # Trigger JS response for dynamic update
       end
     end
@@ -38,7 +38,7 @@ class ReadingListsController < ApplicationController
   def deactivate
     @reading_list.active = false
     @reading_list.save
-    redirect_to reading_lists_path, notice: "Book successfully removed from your reading list."
+    redirect_to reading_lists_path
   end
 
   private
