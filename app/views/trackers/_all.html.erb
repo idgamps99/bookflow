@@ -9,7 +9,7 @@
         <p class="activity-author"><%= t.reading_list.book.author %></p>
       </div>
 
-      <!-- Progress bar -->
+      <!-- Progress bar
       <div class="progress">
         <% total_pages = t.reading_list.book.page_count %>
         <% current_page = t.current_page %>
@@ -23,6 +23,16 @@
             style="width: <%= progress_percentage %>%;"><%= progress_percentage %>%
           </div>
       </div>
+-->
+ <div class="bf-progress">
+        <% total_pages = t.reading_list.book.page_count %>
+        <% current_page = t.current_page %>
+        <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
+
+        <div class="bf-progress-bar" style="width: <%= progress_percentage %>%;"></div>
+        <div class="bf-progress-text"><%= progress_percentage %>%</div>
+      </div>
+
 
       <!-- Details -->
       <div class="activity-info">

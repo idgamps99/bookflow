@@ -1,0 +1,17 @@
+$card-bg-color: #f9f9f9;
+$card-border-radius: 12px;
+$box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+$text-color: #666;
+$linear-color: linear-gradient(90deg, #e49933, #e36f08);
+
+
+.bf-chart {
+  background-color: $card-bg-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow;
+  width: 100%;
+  height: 210px;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #e49933;
+}

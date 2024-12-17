@@ -8,25 +8,34 @@
     <%= @tracker.total_minutes_spent % 60 %> Seconds
   </p>
 
+<div class="bf-chart">
   <%= column_chart @reading_sessions_done
                     .group_by_day_of_week(:session_start, format: "%a")
                     .sum(:duration).map { |k, v| [k, v/60] },
+                    height: "200px",
+                    colors: ["#e49933", "#e36f08"],
                     ytitle: "Total Duration (minutes)",
-                        title: "Reading Sessions Duration",
-                        library: {
-                          scales: {
-                            y: {
-                              ticks: {
-                              stepSize: 30
-                              }
-                            }
+                    title: "Reading Sessions Duration",
+                    library: {
+                      scales: {
+                        y: {
+                          ticks: {
+                          stepSize: 30
                           }
-                        } %>
+                        }
+                      }
+                    } %>
+</div>
 
-
+<div class="bf-chart">
   <%= column_chart @reading_sessions_done
                       .group_by_day_of_week(:session_start, format: "%a")
                       .average(:page_count).map { |k, v| [k, v.to_i] },
+                      height: "200px",
+                      colors: ["#e49933", "#e36f08"],
+                      title: "Average Pages Read",
                       ytitle: "average page read" %>
+
+</div>
 
 <% end %>
