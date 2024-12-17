@@ -56,20 +56,60 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
 .bf-progress {
   background-color: #e1e1e1;
   border-radius: 5px;
-  height: 18px;
+  height: 21px;
   width: 90%;
-  overflow: hidden;
+  //overflow: hidden;
   text-align: center;
   margin: 20px auto;
 
-  .bf-progress-bar {
-    background: $linear-color;
-    height: 100%;
-    border-radius: 5px;
-  }
+  position: relative;
 }
+
+.bf-progress-bar {
+  background: $linear-color;
+  height: 100%;
+  border-radius: 5px;
+
+  // position: relative;
+  //z-index: 1;
+}
+
+.bf-progress-text {
+  position: absolute;
+  // top: 394px;
+  // left: 50%;
+  // transform: translateX(-50%);
+  width: 90%;
+  //z-index: 2;
+  color: #4a4a4a;
+  font-weight: bold;
+  left: 6%;
+  top: -1px;
+}
+
+
 
 .bf-form-text-input {
   width: 20%;
   margin: auto;
+}
+
+
+.bf-stopwatch-text {
+  font-size: 24px;
+  margin: 0px 0;
+}
+
+
+.bf-card-stat {
+  background-color: #f9f9f9;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 16px auto;
+  padding: 18px;
+  font-weight: bold;
+
+  p {
+    margin: 0;
+  }
 }
