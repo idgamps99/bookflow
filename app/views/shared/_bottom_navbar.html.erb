@@ -1,28 +1,45 @@
 <nav class="bottom_navbar">
   <ul class="bottom_navbar__tabs">
     <li class="bottom_navbar__tab">
-      <% if controller_name == 'pages'  %>
-        <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
-          <i class="fas fa-compass" style='color:red;'></i>
-          <span>Discover</span>
-        <% end %>
-      <% else %>
+      <% if controller_name == "pages"  %>
         <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
           <i class="fas fa-compass"></i>
           <span>Discover</span>
         <% end %>
+      <% else %>
+        <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
+          <i class="fas fa-compass" style="color:#B6BEC7;"></i>
+          <span>Discover</span>
+        <% end %>
       <% end %>
     </li>
+
     <li class="bottom_navbar__tab">
-      <%= link_to trackers_path, class: "bottom_navbar__link", id: "reading-activity" do %>
-        <i class="fas fa-book-open"></i>
-        <span>Reading Activity</span>
+      <% if controller_name == "trackers" %>
+        <%= link_to trackers_path, class: "bottom_navbar__link", id: "reading-activity" do %>
+          <i class="fas fa-book-open"></i>
+          <span>Reading Activity</span>
+        <% end %>
+      <% else %>
+        <%= link_to trackers_path, class: "bottom_navbar__link", id: "reading-activity" do %>
+          <i class="fas fa-book-open" style="color:#B6BEC7;"></i>
+          <span>Reading Activity</span>
+        <% end %>
       <% end %>
     </li>
+
+
     <li class="bottom_navbar__tab">
+      <% if controller_name == "reading_lists" %>
       <%= link_to reading_lists_path, class: "bottom_navbar__link", id: "my-books" do %>
         <i class="fa-solid fa-bookmark"></i>
         <span>My Books</span>
+      <% end %>
+      <% else %>
+      <%= link_to reading_lists_path, class: "bottom_navbar__link", id: "my-books" do %>
+        <i class="fa-solid fa-bookmark" style="color:#B6BEC7;"></i>
+        <span>My Books</span>
+      <% end %>
       <% end %>
     </li>
   </ul>

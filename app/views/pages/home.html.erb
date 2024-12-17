@@ -9,7 +9,7 @@
       <div class="main-banner-content">
         <h1>Bookflow</h1>
         <p>Discover and Share Books</p>
-        <p><%= link_to "Log in", new_user_session_path, class: "primary-button" %></p>
+        <p><%= link_to "Log in", new_user_session_path, class: "primary-button" unless user_signed_in? %></p>
       </div>
     </div>
   </div>
