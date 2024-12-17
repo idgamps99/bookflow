@@ -25,20 +25,66 @@
 
 <% end %>
 -->
-<p><%= @trackers_all.count %> Books tracked</p>
+<div class="d-flex justify-content-between bf-card-stat">
+  <p>Books tracked: </p>
+  <p>
+  <%= @trackers_all.count %>
+  </p>
+</div>
 
-<%= line_chart @trackers_all.group_by_day(:created_at, format: "%a").count
-                  .map { |k, v| [k, v] },
-                  ytitle: "Total Books" %>
+<div class="d-flex justify-content-between bf-card-stat">
+  <p>Time spent reading: </p>
+  <p>
+  <%= @total_minutes_spent / 3600 %> Hrs,
+  <%= (@total_minutes_spent % 3600) / 60 %> Min,
+  <%= @total_minutes_spent % 60 %> Sec
+  </p>
+</div>
+
+<div class="d-flex justify-content-between bf-card-stat">
+  <p>Pages read: </p>
+  <p>
+  <%= @total_current_pages %>
+  </p>
+</div>
 
 
+<div class="bf-chart">
+  <%= line_chart @trackers_all.group_by_day(:created_at, format: "%a").count
+                    .map { |k, v| [k, v] },
+                    height: "240px",
+                    colors: ["#e49933", "#e36f08"],
+                    title: "Total Books" %>
 
-<p>Total pages read: <%= @total_current_pages %></p>
-<%= line_chart @trackers_all.group_by_day(:created_at, format: "%a")
-                    .average(:current_page),
-                    ytitle: "Average per Day" %>
 
-<p>Total Time spent reading: <%= Time.at(@total_minutes_spent).utc.strftime("%H:%M:%S") %></p>
-<%= line_chart @trackers_all.group_by_day(:created_at, format: "%a").average(:total_minutes_spent)
-                              .map { |k, v| [k, v.to_i]},
-                              ytitle: "Average per Day" %>
+</div>
+
+<div class="bf-chart">
+  <%= line_chart @trackers_all.group_by_day(:created_at, format: "%a")
+                      .average(:current_page),
+                      height: "240px",
+                      colors: ["#e49933", "#e36f08"],
+                      title: "Daily Pages" %>
+
+
+</div>
+
+<div class="bf-chart">
+  <%= line_chart @trackers_all.group_by_day(:created_at, format: "%a")
+                                .average(:total_minutes_spent)
+                                .map { |k, v| [k, v.to_i/60] },
+                                height: "240px",
+                                colors: ["#e49933", "#e36f08"],
+                                title: "Time Spent (minutes)",
+                                library: {
+                                  scales: {
+                                    y: {
+                                      ticks: {
+                                        stepSize: 30
+                                      }
+                                    }
+                                  }
+                                } %>
+
+
+</div>

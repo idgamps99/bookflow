@@ -14,9 +14,9 @@ class TrackersController < ApplicationController
     @tracker = Tracker.new()
     @tracker.reading_list = @reading_list
     if @tracker.save
-      redirect_to reading_list_path(@reading_list), notice: "Tracker successfully created."
+      redirect_to reading_list_path(@reading_list)
     else
-      redirect_to reading_list_path(@reading_list), alert: "Tracker could not be created."
+      redirect_to reading_list_path(@reading_list)
     end
   end
 
