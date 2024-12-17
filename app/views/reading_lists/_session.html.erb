@@ -1,7 +1,7 @@
  <% @reading_sessions_done.each do |ses| %>
   <div class="session-card bf-session-card">
-    <div class="bf-session-info">Duration: <%= Time.at(ses.duration).utc.strftime("%H:%M:%S") %></div class="bf-session-info">
-    <div class="bf-session-info">Pages read during the session: <%= ses.page_count %></div class="bf-session-info">
+    <div class="bf-session-info">Duration: <%= (ses.duration / 3600).to_i %> Hrs <%= (ses.duration % 3600 / 60).to_i %> Min <%= (ses.duration % 60).to_i %> Sec</div class="bf-session-info">
+    <div class="bf-session-info">Pages read during the session<br><%= ses.page_count %></div class="bf-session-info">
     <div class="bf-session-info">Session started: <%= ses.session_start.strftime("%B %d, %Y %I:%M %p") %></div class="bf-session-info">
     <div class="bf-session-info">Session ended: <%= ses.session_end.strftime("%B %d, %Y %I:%M %p") %></div class="bf-session-info">
   </div>
