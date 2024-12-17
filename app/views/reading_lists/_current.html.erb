@@ -88,16 +88,16 @@
 
 
           <div class="modal fade" id="SessionEndModal" tabindex="-1" aria-labelledby="SessionEndModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="SessionEndModalLabel">Session End</h1>
+                    <h1 class="modal-title fs-5 w-100 text-center" id="SessionEndModalLabel">Session End</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
-                  <p>Started at: <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M") %></p>
-                  <p>Enter new page number to end session</p>
+                  <!-- <p>Started at: <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M") %> -->
+                  <p>Enter new page number to end the session</p>
                   <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
                     <div class="d-flex flex-column">
                       <%= form.number_field :page_count, value: @tracker.current_page, class: "mb-2 bf-form-text-input" %>
