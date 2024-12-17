@@ -1,0 +1,54 @@
+<!-- <ul>
+  <% @reviews.each do |review| %>
+    <li><%= review.title %></li>
+    <li><%= review.content %></li>
+    <li>><%= review.rating %></li>
+  <% end %>
+</ul>
+
+<% if !@books_reviewed.nil? %>
+  <ul>
+    <% @books_reviewed.each do |book| %>
+      <li><%= book.title %></li>
+    <% end %>
+  </ul>
+<% end %> -->
+
+<% @reviews.each do |review| %>
+  <div class="review">
+    <% book = Book.find(review.book_id) %>
+    <%= image_tag book.cover_url.present? ? book.cover_url : 'Discover/missingbook.jpeg', alt: book.title, class: "book-detail-cover" %>
+
+    <h4><%= review.title %></h4>
+    <p><%= review.content %></p>
+    <div>
+      <%# <strong>Rating:</strong> %>
+      <% (1..5).each do |star| %>
+        <% if review.rating >= star %>
+          <i class="fa-solid fa-star" style="color: #FFD700;"></i>
+        <% else %>
+          <i class="fa-regular fa-star" style="color: #FFD700;"></i>
+        <% end %>
+      <% end %>
+    </div>
+
+      <button type="button" data-action="click->toggle#fireEdit" class="edit-review-btn">
+        <i class="fa-solid fa-pen" style="margin-right: 8px;"></i>Edit
+      </button>
+      <div data-toggle-target="toggleEdit" class="d-none">
+        <div id="edit-form" class="form">
+          <p style="margin-top: 20px; font-weight: bold;">Edit review for <%= book.title %></p>
+          <%= simple_form_for([book, review], url: book_review_path(book, review), html: { autocomplete: "off" }) do |f| %>
+            <%= f.input :title, label: "Title", autocomplete: "off", input_html: { class: "input-form" } %>
+            <%= f.input :content, autocomplete: "off", input_html: { class: "input-form" } %>
+            <%= f.input :rating, label: "Rating", input_html: { class: "input-form" } %>
+            <%= f.button :submit, value: "Update Review", class: "book-detail-submit-review-btn" %>
+          <% end %>
+        </div>
+      </div>
+      <%= link_to book_review_path(book, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete-review-btn" do %>
+        <i class="fa-solid fa-x" style="margin-right: 8px;"></i>Delete
+      <% end %>
+
+  </div>
+<% end %>
