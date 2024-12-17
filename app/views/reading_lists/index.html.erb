@@ -1,42 +1,51 @@
 <div class="outter">
-  <%= image_tag "" %>
-  <h2>Library</h2>
-</div>
-
-<div class="index-container">
-  <div class="book-section">
-    <% if @reading_lists.empty? %>
-      <p>There are no Books yet.</p>
-    <% else %>
-      <div class="books">
-        <% @reading_lists.each do |reading_list| %>
-          <div class="book-card">
-            <% if reading_list.book.cover_url.present? %>
-              <div class="book-cover-container">
-                <%= link_to book_path(reading_list.book) do %>
-                  <%= image_tag reading_list.book.cover_url, alt: "Book Cover", class: "book-cover" %>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="book-cover-container">
-                <%= link_to book_path(reading_list.book) do %>
-                  <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+  <h2 class="index-title">Library</h2>
+  <div class="scroll-tabs">
+    <ul class="nav nav-pills scroll-tabs-nav mb-3 " id="pills-tab" role="tablist">
+      <li class="scroll-nav-item" role="presentation">
+        <button class="scroll-nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="true">All</button>
+      </li>
+      <li class="scroll-nav-item" role="presentation">
+        <button class="scroll-nav-link" id="pills-current-tab" data-bs-toggle="pill" data-bs-target="#pills-current" type="button" role="tab" aria-controls="pills-current" aria-selected="false">Current
+        </button>
+      </li>
+      <li class="scroll-nav-item" role="presentation">
+        <button class="scroll-nav-link" id="pills-read-tab" data-bs-toggle="pill" data-bs-target="#pills-read" type="button" role="tab" aria-controls="pills-read" aria-selected="false">Read</button>
+      </li>
+      <li class="scroll-nav-item" role="presentation">
+        <button class="scroll-nav-link" id="pills-reviewed-tab" data-bs-toggle="pill" data-bs-target="#pills-reviewed" type="button" role="tab" aria-controls="pills-reviewed" aria-selected="false">Reviewed</button>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+      <%= render "library_all" %>
+    </div>
+    <div class="tab-pane fade" id="pills-current" role="tabpanel" aria-labelledby="pills-current-tab">Current</div>
+    <div class="tab-pane fade" id="pills-read" role="tabpanel" aria-labelledby="pills-read-tab">Read</div>
+    <div class="tab-pane fade" id="pills-reviewed" role="tabpanel" aria-labelledby="pills-reviewed-tab">Reviewed</div>
   </div>
 </div>
 
-<div class="outter">
-  <h2>Books read</h2>
-</div>
+
 
 <div class="">
   <% @reading_lists_done.each do |done| %>
     <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
   <% end %>
 </ul>
+
+    <%# <ul class="nav nav-pills scroll-tabs-nav">
+      <li class="scroll-nav-item">
+        <a class="scroll-nav-link active" aria-current="page" href="#">All</a>
+      </li>
+      <li class="scroll-nav-item">
+        <a class="scroll-nav-link" href="#">Current</a>
+      </li>
+      <li class="scroll-nav-item">
+        <a class="scroll-nav-link" href="#">Read</a>
+      </li>
+      <li class="scroll-nav-item">
+        <a class="scroll-nav-link" href="#">Reviewed</a>
+      </li>
+    </ul> %>
