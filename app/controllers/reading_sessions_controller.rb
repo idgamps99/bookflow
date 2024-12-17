@@ -48,9 +48,9 @@ class ReadingSessionsController < ApplicationController
 
     if @reading_session.save
       # Log the session_start and redirect to the reading list
-      redirect_to reading_list_path(@tracker.reading_list), notice: "Reading session successfully created."
+      redirect_to reading_list_path(@tracker.reading_list)
     else
-      redirect_to reading_list_path(@tracker.reading_list), alert: "Reading session could not be created."
+      redirect_to reading_list_path(@tracker.reading_list)
     end
   end
 
@@ -73,12 +73,12 @@ class ReadingSessionsController < ApplicationController
         # @tracker.total_minutes_spent += @reading_session.duration
         # @tracker.reading_status = "Reading session ended"
         @tracker.save
-        redirect_to reading_list_path(@tracker.reading_list), notice: "Reading session successfully ended."
+        redirect_to reading_list_path(@tracker.reading_list)
       else
-        redirect_to reading_list_path(@tracker.reading_list), alert: "Reading session could not end."
+        redirect_to reading_list_path(@tracker.reading_list)
       end
     else
-      redirect_to reading_list_path(@tracker.reading_list), alert: "No active reading session found."
+      redirect_to reading_list_path(@tracker.reading_list)
     end
   end
 

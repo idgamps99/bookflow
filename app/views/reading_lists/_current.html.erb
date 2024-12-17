@@ -2,7 +2,7 @@
 
 
   <%# <%= button_to "Remove from List", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
-  <div class="card p-2 text-center m-3 bf-card">
+  <div class="card p-2 text-center m-3 mx-0 bf-card">
     <div class="">
       <%= image_tag @reading_list.book.cover_url, class: "bf-card-img mt-2" %>
     </div>
@@ -33,12 +33,11 @@
       <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post, class: "book-detail-add-button" %>
     <% else %>
 
-      <!-- Progress bar -->
+      <!-- Progress bar
       <div class="bf-progress">
         <% total_pages = @reading_list.book.page_count %>
         <% current_page = @tracker.current_page %>
         <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
-
 
         <div class="bf-progress-bar"
           role="progressbar"
@@ -48,7 +47,19 @@
           style="width: <%= progress_percentage %>%;"><%= progress_percentage %>%
         </div>
       </div>
+-->
+ <!-- Progress bar -->
+      <div class="bf-progress">
+        <% total_pages = @reading_list.book.page_count %>
+        <% current_page = @tracker.current_page %>
+        <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
 
+        <div class="bf-progress-bar" style="width: <%= progress_percentage %>%;"></div>
+        <div class="bf-progress-text" style="top:0px"><%= progress_percentage %>%</div>
+      </div>
+
+
+<!--
       <div class="bf-text-box">
         <div class="d-flex justify-content-between bf-text-time">
           <p>Time spent: </p>
@@ -59,7 +70,7 @@
           <p><strong><%= @tracker.current_page %></strong></p>
         </div>
       </div>
-
+-->
   </div>
 
 
@@ -68,25 +79,25 @@
 
           <%# <p><small>Session is still ongoing</small></p> %>
 
-          <button type="button" class="book-detail-add-button" data-bs-toggle="modal" data-bs-target="#SessionEndModal">
-            End Session
+          <button type="button" class="bf-btn-sessions" data-bs-toggle="modal" data-bs-target="#SessionEndModal">
+            <div data-controller="stopwatch">
+              <strong><p class="bf-stopwatch-text bf-btn-margin" data-stopwatch-target="timer">00:00</p></strong>
+            </div>
+            End
           </button>
 
-          <div data-controller="stopwatch">
-            <p data-stopwatch-target="timer">00:00</p>
-          </div>
 
           <div class="modal fade" id="SessionEndModal" tabindex="-1" aria-labelledby="SessionEndModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="SessionEndModalLabel">Session End</h1>
+                    <h1 class="modal-title fs-5 w-100 text-center" id="SessionEndModalLabel">Session End</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
-                  <p>Started at: <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M") %></p>
-                  <p>Enter new page number to end session</p>
+                  <!-- <p>Started at: <%= Time.at(@reading_session.session_start).utc.strftime("%H:%M") %> -->
+                  <p>Enter new page number to end the session</p>
                   <%= form_with(model: @reading_session, url: tracker_reading_session_path(tracker_id: @tracker, id: @reading_session), method: :patch) do |form| %>
                     <div class="d-flex flex-column">
                       <%= form.number_field :page_count, value: @tracker.current_page, class: "mb-2 bf-form-text-input" %>
@@ -102,7 +113,7 @@
 
 
         <% else %>
-          <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }, class: "book-detail-add-button"%>
+          <%= button_to "Start Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }, class: "bf-btn-sessions"%>
         <% end %>
       </div>
 
