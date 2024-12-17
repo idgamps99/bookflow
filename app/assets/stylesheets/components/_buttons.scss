@@ -13,3 +13,32 @@
 .bf-link-back i {
   color: white;
 }
+
+.genres-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// .bf-link-right {
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 50%;
+//   background-color: #9b9b9b;
+//   text-decoration: none;
+//   width: 20px;
+//   height: 20px;
+//   margin-bottom: 5px;
+//   margin-left: -5px;
+// }
+
+.bf-link-right i {
+  color: black;
+  width: auto;
+  font-size: 14px;
+  margin-bottom: 9px;
+  margin-right: 1px;
+  margin-left: -4px;
+  // margin: 0px, 1px, 9px, -4px;
+}

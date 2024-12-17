@@ -15,7 +15,7 @@
     </li>
 
     <li class="bottom_navbar__tab">
-      <% if controller_name == "trackers" %>
+      <% if controller_name == "trackers" || (controller_name == "reading_lists" && action_name == "show") %>
         <%= link_to trackers_path, class: "bottom_navbar__link", id: "reading-activity" do %>
           <i class="fas fa-book-open"></i>
           <span>Reading Activity</span>
@@ -30,7 +30,7 @@
 
 
     <li class="bottom_navbar__tab">
-      <% if controller_name == "reading_lists" %>
+      <% if controller_name == "reading_lists" && action_name != "show" %>
       <%= link_to reading_lists_path, class: "bottom_navbar__link", id: "my-books" do %>
         <i class="fa-solid fa-bookmark"></i>
         <span>My Books</span>

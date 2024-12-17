@@ -15,7 +15,15 @@
   </div>
 
   <div class="genres">
-    <h3><%= link_to "Genres", genres_path %></h3>
+    <div class="genres-header">
+      <h3><%= link_to "Genres", genres_path %></h3>
+      <div class="bf-link-right">
+        <%= link_to genres_path do %>
+          <i class="fa-solid fa-circle-chevron-right"></i>
+        <% end %>
+      </div>
+    </div>
+
     <div class="genre-buttons">
       <div class="genre-container">
         <%= link_to books_path(genre_query: "Fantasy"), class: "genre-button" do %>
