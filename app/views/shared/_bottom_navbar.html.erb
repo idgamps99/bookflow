@@ -1,9 +1,16 @@
 <nav class="bottom_navbar">
   <ul class="bottom_navbar__tabs">
     <li class="bottom_navbar__tab">
-      <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
-        <i class="fas fa-compass"></i>
-        <span>Discover</span>
+      <% if controller_name == 'pages'  %>
+        <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
+          <i class="fas fa-compass" style='color:red;'></i>
+          <span>Discover</span>
+        <% end %>
+      <% else %>
+        <%= link_to root_path, class: "bottom_navbar__link", id: "discover" do %>
+          <i class="fas fa-compass"></i>
+          <span>Discover</span>
+        <% end %>
       <% end %>
     </li>
     <li class="bottom_navbar__tab">

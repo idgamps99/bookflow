@@ -42,7 +42,6 @@ class BooksController < ApplicationController
     end
     genres
   end
-
   end
 
   private
