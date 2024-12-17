@@ -79,12 +79,12 @@
 
           <%# <p><small>Session is still ongoing</small></p> %>
 
-          <button type="button" class="book-detail-add-button mt-0" data-bs-toggle="modal" data-bs-target="#SessionEndModal">
-            End Session
-          </button>
+          <button type="button" class="bf-btn-sessions" data-bs-toggle="modal" data-bs-target="#SessionEndModal">
             <div data-controller="stopwatch">
               <strong><p class="bf-stopwatch-text" data-stopwatch-target="timer">00:00</p></strong>
             </div>
+            End
+          </button>
 
 
           <div class="modal fade" id="SessionEndModal" tabindex="-1" aria-labelledby="SessionEndModalLabel" aria-hidden="true">
@@ -113,7 +113,7 @@
 
 
         <% else %>
-          <%= button_to "Start a new Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }, class: "book-detail-add-button"%>
+          <%= button_to "Start Session", tracker_reading_sessions_path(@tracker), method: :post, data: { turbo_method: :post }, class: "bf-btn-sessions"%>
         <% end %>
       </div>
 
