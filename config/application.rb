@@ -30,5 +30,6 @@ module Bookflow
     config.time_zone = "Europe/Paris"
     config.active_record.default_timezone = :utc
     # config.eager_load_paths << Rails.root.join("extras")
+    config.active_job.queue_adapter = :solid_queue
   end
 end
