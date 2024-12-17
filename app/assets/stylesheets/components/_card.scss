@@ -124,13 +124,13 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
     &:first-child { // Pages read
       font-weight: bold;
       font-size: 1.1rem;
-      color: black; // Bootstrap primary
+      color: #4a4a4a; // Bootstrap primary
     }
 
     &:nth-child(2) { // Duration
       font-size: 1.25rem;
       font-weight: 600;
-      color: #4a4a4a; // Bootstrap success
+      color: #000000; // Bootstrap success
     }
 
     &:nth-child(3),
