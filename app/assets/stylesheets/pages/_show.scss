@@ -56,15 +56,16 @@
   transition: background-color 0.3s ease;
 }
 
-.book-detail-leave-review-btn {
-  background: grey;
-  color: white;
+.book-detail-leave-review-btn, .edit-review-btn, .delete-review-btn {
+  background: white;
+  color: rgb(46, 46, 46);
   padding: 12px 20px;
-  border: none;
   border-radius: 50px;
   cursor: pointer;
   font-size: 16px;
   margin-top: 10px;
+  text-decoration: none;
+  border: 1px solid #e0e0e0; /* Light gray border for separation */
   transition: background-color 0.3s ease;
 }
 /* Reviews Section */
@@ -97,32 +98,10 @@
   color: #555;
 }
 
-.book-detail-input-title, .book-detail-input-content, .book-detail-input-rating {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.book-detail-input-title, .book-detail-input-content {
-  height: 40px;
-}
-
-.book-detail-input-rating {
-  width: 60px;
-}
-
 .book-detail-review-form-container, .book-detail-edit-form-container {
   margin-top: 20px;
 }
 
-.book-detail-review-form, .book-detail-edit-form {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
 
 /* Hide elements by default */
 .d-none {
@@ -131,4 +110,50 @@
 
 .book-rating {
   margin-top: 5px;
+}
+
+.book-detail-leave-review-btn i {
+  margin-right: 8px;
+}
+
+.review {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  background-color: white;
+}
+
+.review h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.review p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.input-form {
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white !important;
+  font-size: 16px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.edit-review-btn, .delete-review-btn {
+  display: inline-block;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+#edit-form {
+  margin-top: 15px;
 }

@@ -1,4 +1,4 @@
-<div class="book-detail-container" data-controller="toggle" >
+<div class="book-detail-container">
   <div class="book-detail-header">
     <div class="book-detail-cover-container">
       <%= image_tag @book.cover_url.present? ? @book.cover_url : 'Discover/missingbook.jpeg', alt: @book.title, class: "book-detail-cover" %>
@@ -21,41 +21,47 @@
     </div>
   </div>
 
-  <p><strong>Summary:</strong></p>
-  <p class="book-detail-summary"><%= @book.summary %></p>
 <!--
   <div id="reading-list-actions" data-controller="reading-list-session-button">
-    <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action:"click->reading-list-session-button#fireReview", turbo_method: :post } %>
+    <%= button_to book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { action: "click->reading-list-session-button#fireReview" } do %>
+      <i class="fa-solid fa-plus" style="margin-right: 8px;"></i>Add to Reading List
+    <% end %>
     <div id="confirmation-message" data-reading-list-session-button-target="message" class="d-none">
       <p>Your book has been added to your reading list!</p>
       <button type="button" id="start-reading-session-btn" data-reading-list-session-button-target="button" class="book-detail-start-reading-session-btn d-none" data-action="click->toggle#fireStartReadingSession">Start Tracking</button>
     </div>
   </div> -->
 
+  <h4 style="margin-top: 30px;">Reviews</h3>
 <% if current_user.reading_lists.where(book_id: @book.id, active: true).exists? %>
-  <div>
-    <p><%= "Added" %></p>
-    <% if @reading_list.active %>
-      <%= link_to "Go to Tracker", reading_list_path(@reading_list) %>
-    <% else %>
-      <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post %>
-    <% end %>
+  <div class="d-flex justify-content-between">
+    <!-- <p><%= "Added" %></p> -->
+    <%= button_to "Remove from My Books", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }, class: "book-detail-leave-review-btn"  %>
+    <%= link_to "Go to Tracker", reading_list_path(@reading_list), class: "book-detail-add-button text-decoration-none" %>
   </div>
 <% else %>
   <%= button_to "Add to Reading List", book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { turbo_method: :post } %>
 <% end %>
+
+
+  <p><strong>Summary:</strong></p>
+  <p class="book-detail-summary"><%= @book.summary %></p>
+
+
 <h3>Reviews</h3>
 
   <!-- Review Form Toggle -->
-  <div >
-    <button type="button" data-action="click->toggle#fireReview" class="book-detail-leave-review-btn">Leave a Review</button>
+  <div data-controller="toggle">
+    <button type="button" data-action="click->toggle#fireReview" class="book-detail-leave-review-btn">
+      <i class="fa-regular fa-comment"></i> Leave a Review
+    </button>
     <div data-toggle-target="togglableElement" class="d-none">
-      <div id="review-form">
-        <h3>Leave a Review for <%= @book.title %></h3>
-        <%= simple_form_for([@book, @book.reviews.new], html: { autocomplete: "off" }) do |f| %>
-          <%= f.input :title, label: "Title", autocomplete: "off", class: "input-title" %>
-          <%= f.input :content, autocomplete: "off", class: "input-content" %>
-          <%= f.input :rating, label: "Rating (0-5)", autocomplete: "off", class: "input-rating" %>
+      <div id="review-form" class="form">
+        <p style="margin-top: 20px; font-weight: bold;">Write a Review for <%= @book.title %></p>
+        <%= simple_form_for([@book, @review], html: { autocomplete: "off" }) do |f| %>
+          <%= f.input :title, label: "Title", autocomplete: "off", input_html: {class: "input-form"} %>
+          <%= f.input :content, autocomplete: "off", input_html: {class: "input-form"} %>
+          <%= f.input :rating, label: "Rating (0-5)", autocomplete: "off", input_html: {class: "input-form"} %>
           <%= f.button :submit, value: "Submit Review", class: "book-detail-submit-review-btn" %>
         <% end %>
       </div>
@@ -63,27 +69,34 @@
   </div>
 
   <!-- Reviews Display -->
-  <% @book.reviews.each do |review| %>
-    <div class="review">
+  <% @reviews.each do |review| %>
+    <div class="review" data-controller="toggle">
       <h5><%= review.title %></h5>
+      <% user = review.user %>
+      <% if user %>
+        <p>by <%= user.first_name %> <%= user.last_name %></p>
+      <% end %>
       <p><%= review.content %></p>
-      <p>Rating: <%= review.rating %></p>
 
       <!-- Edit & Delete Options for the User's Own Review -->
       <% if review.user == current_user %>
-        <button type="button" data-action="click->toggle#fireEdit" class="edit-review-btn">Edit Review</button>
+        <button type="button" data-action="click->toggle#fireEdit" class="edit-review-btn">
+          <i class="fa-solid fa-pen" style="margin-right: 8px;"></i>Edit
+        </button>
         <div data-toggle-target="toggleEdit" class="d-none">
-          <div id="edit-form">
-            <h2>Edit review for <%= @book.title %></h2>
-               <%= simple_form_for([@book, review], url: book_review_path(@book, review)) do |f| %>
-              <%= f.input :title, label: "Title", class: "input-title" %>
-              <%= f.input :content, class: "input-content" %>
-              <%= f.input :rating, label: "Rating (0-5)", class: "input-rating" %>
-              <%= f.button :submit, value: "Update Review", class: "submit-review-btn" %>
+          <div id="edit-form" class="form">
+            <p style="margin-top: 20px; font-weight: bold;">Edit review for <%= @book.title %></p>
+            <%= simple_form_for([@book, review], url: book_review_path(@book, review), html: { autocomplete: "off" }) do |f| %>
+              <%= f.input :title, label: "Title", autocomplete: "off", input_html: {class: "input-form"} %>
+              <%= f.input :content, autocomplete: "off", input_html: {class: "input-form"} %>
+              <%= f.input :rating, label: "Rating (0-5)", autocomplete: "off", input_html: {class: "input-form"} %>
+              <%= f.button :submit, value: "Update Review", class: "book-detail-submit-review-btn" %>
             <% end %>
           </div>
         </div>
-        <%= link_to "Delete", book_review_path(@book, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete-review-btn" %>
+        <%= link_to book_review_path(@book, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete-review-btn" do %>
+          <i class="fa-solid fa-x" style="margin-right: 8px;"></i>Delete
+        <% end %>
       <% end %>
     </div>
   <% end %>
