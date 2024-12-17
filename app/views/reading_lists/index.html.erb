@@ -1,8 +1,9 @@
-
-
+<div class="outter">
+  <%= image_tag "" %>
+  <h2>Library</h2>
+</div>
 
 <div class="index-container">
-  <h2>Library</h2>
   <div class="book-section">
     <% if @reading_lists.empty? %>
       <p>There are no Books yet.</p>
@@ -30,7 +31,10 @@
   </div>
 </div>
 
-<h2>Books Read</h2>
+<div class="outter">
+  <h2>Books read</h2>
+</div>
+
 <div class="">
   <% @reading_lists_done.each do |done| %>
     <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
