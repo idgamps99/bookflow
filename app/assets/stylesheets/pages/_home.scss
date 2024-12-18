@@ -79,7 +79,7 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
-  padding: 10px 0;
+  // padding: 10px 0;
 }
 
 .genre-buttons::-webkit-scrollbar {
@@ -98,6 +98,11 @@
   border-radius: 50%;
   object-fit: cover;
   transition: transform 0.3s ease;
+}
+
+.dystopian {
+  position: relative; 
+  top: 20px
 }
 
 .genre-container {

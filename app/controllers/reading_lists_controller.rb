@@ -6,6 +6,10 @@ class ReadingListsController < ApplicationController
     @reading_lists_done = ReadingList.where(active: false, user_id: current_user)
     @books_read = current_user.reading_lists.where(read: true).includes(:book).map(&:book)
 
+    # For reviews tab
+    @reviews = Review.where(user_id: current_user)
+    book_ids = @reviews.map { |review| review.book_id } # Extract all book IDs
+    @books_reviewed = Book.where(id: book_ids)
   end
 
   def show

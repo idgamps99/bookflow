@@ -78,7 +78,7 @@
       <% end %>
       <p><%= review.content %></p>
       <div>
-        <strong>Rating:</strong>
+        <%# <strong>Rating:</strong> %>
         <% (1..5).each do |star| %>
           <% if review.rating >= star %>
             <i class="fa-solid fa-star" style="color: #FFD700;"></i>
