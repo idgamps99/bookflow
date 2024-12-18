@@ -6,26 +6,25 @@
       </div>
       <div class="activity-details">
         <h3 class="activity-title"><%= t.reading_list.book.title %></h3>
-        <p class="activity-author"><%= t.reading_list.book.author %></p>
+        <p class="activity-author" style="font-size: 17px;">by <%= t.reading_list.book.author %></p>
       </div>
 
       <div class="bf-progress">
-        <% total_pages = t.reading_list.book.page_count %>
-        <% current_page = t.current_page %>
-        <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
-
+        <% total_pages = t.reading_list&.book&.page_count || 0 %>
+        <% current_page = t.current_page || 0 %>
+        <% progress_percentage = total_pages > 0 ? (current_page.to_f / total_pages * 100).round : 0 %>
         <div class="bf-progress-bar" style="width: <%= progress_percentage %>%;"></div>
         <div class="bf-progress-text"><%= progress_percentage %>%</div>
       </div>
 
       <!-- Details -->
       <div class="activity-info">
-        <div class="activity-row activity-time">
-          <p>Time:</p>
+        <div class="activity-row activity-time" style="font-size: 17px;">
+          <strong>Time:</strong>
           <p><%= Time.at(t.total_minutes_spent).utc.strftime("%H:%M:%S") %></p>
         </div>
-        <div class="activity-row activity-pages">
-          <p>Pages:</p>
+        <div class="activity-row activity-pages" style="font-size: 17px;">
+          <strong>Pages:</strong>
           <p><%= t.current_page %></p>
         </div>
       </div>
