@@ -113,3 +113,31 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
     margin: 0;
   }
 }
+
+
+.bf-session-card{
+
+  .bf-session-info{
+    text-align: center;
+    margin: 8px 0;
+
+    &:first-child { // Pages read
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #4a4a4a; // Bootstrap primary
+    }
+
+    &:nth-child(2) { // Duration
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #000000; // Bootstrap success
+    }
+
+    &:nth-child(3),
+    &:nth-child(4) { // Start and End times
+      font-size: 0.9rem;
+      color: gray; // Bootstrap secondary
+      margin: 0 auto;
+    }
+  }
+}
