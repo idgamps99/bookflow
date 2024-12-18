@@ -15,9 +15,11 @@
 <% end %> -->
 
 <% @reviews.each do |review| %>
-  <div class="review" data-controller="toggle">
+  <div class="review-card" data-controller="toggle">
     <% book = Book.find(review.book_id) %>
-    <%= image_tag book.cover_url.present? ? book.cover_url : 'Discover/missingbook.jpeg', alt: book.title, class: "review-card-img mt-2" %>
+    <div class="image-container">
+      <%= image_tag book.cover_url.present? ? book.cover_url : 'Discover/missingbook.jpeg', alt: book.title, class: "review-card-img mt-2" %>
+    </div>
 
     <h4><%= review.title %></h4>
     <p><%= review.content %></p>

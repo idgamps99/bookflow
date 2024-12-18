@@ -53,13 +53,6 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
   height: 300px;
 }
 
-.review-card-img {
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
 .bf-progress {
   background-color: #e1e1e1;
   border-radius: 5px;
@@ -147,4 +140,36 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
       margin: 0 auto;
     }
   }
+}
+
+
+.review-card-img {
+  height: 300px;
+  margin-bottom: 16px;
+}
+
+.review-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  background-color: white;
+
+  h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+  }
+}
+
+.image-container {
+  text-align: center; /* Center the image horizontally */
 }
