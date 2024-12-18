@@ -157,3 +157,27 @@
 #edit-form {
   margin-top: 15px;
 }
+
+.book-detail-summary-container {
+  overflow: hidden;
+  max-height: 200px; /* Initially collapsed height */
+  transition: max-height 0.3s ease-in-out;
+  margin-bottom: 10px;
+}
+
+
+.book-detail-summary-container.expanded {
+  max-height: none; /* Expanded state */
+}
+
+.book-detail-summary {
+  margin: 0;
+}
+
+.show-more {
+  background: transparent;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  font-style: italic;
+}
