@@ -6,7 +6,7 @@
     </div>
       <div class="activity-details">
         <h3 class="activity-title"><%= t.reading_list.book.title %></h3>
-        <p class="activity-author"><%= t.reading_list.book.author %></p>
+        <p class="activity-author">by <%= t.reading_list.book.author %></p>
       </div>
 
       <!-- Progress bar
@@ -37,11 +37,11 @@
       <!-- Details -->
       <div class="activity-info">
         <div class="activity-row activity-time">
-          <p>Time:</p>
+          <strong>Time:</strong>
           <p><%= Time.at(t.total_minutes_spent).utc.strftime("%H:%M:%S") %></p>
         </div>
         <div class="activity-row activity-pages">
-          <p>Pages:</p>
+          <strong>Pages:</strong>
           <p><%= t.current_page %></p>
         </div>
       </div>

@@ -8,22 +8,7 @@
     </div>
     <div>
       <h1 id="bf-text-title"><%= @reading_list.book.title %></h1>
-      <p id="bf-text-author"><%= @reading_list.book.author %></p>
-
-      <!-- <div class="d-flex justify-content-between">
-        <p><strong>Published Year:</strong> <%= @reading_list.book.year_published %></p>
-        <p><strong>Genre:</strong> <%= @reading_list.book.genre %></p>
-        <p><strong>Page Count:</strong> <%= @reading_list.book.page_count %> pages</p>
-      </div> -->
-
-      <!--
-      <p>
-        <strong>Overall Rating:</strong>
-        <i class="fas fa-star" style="color: #FFD700;"></i>
-        <%= @reading_list.book.overall_rating == @reading_list.book.overall_rating ? @reading_list.book.overall_rating : number_with_precision(@reading_list.book.overall_rating, precision: 1) %>
-        / 5
-      </p>
-      -->
+      <p id="bf-text-author">by <%= @reading_list.book.author %></p>
     </div>
 
 
@@ -33,21 +18,6 @@
       <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post, class: "book-detail-add-button" %>
     <% else %>
 
-      <!-- Progress bar
-      <div class="bf-progress">
-        <% total_pages = @reading_list.book.page_count %>
-        <% current_page = @tracker.current_page %>
-        <% progress_percentage = total_pages.positive? ? (current_page.to_f / total_pages * 100).round : 0 %>
-
-        <div class="bf-progress-bar"
-          role="progressbar"
-          aria-valuenow="<% progress_percentage %>"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style="width: <%= progress_percentage %>%;"><%= progress_percentage %>%
-        </div>
-      </div>
--->
  <!-- Progress bar -->
       <div class="bf-progress">
         <% total_pages = @reading_list.book.page_count %>
@@ -80,12 +50,11 @@
           <%# <p><small>Session is still ongoing</small></p> %>
 
           <button type="button" class="bf-btn-sessions" data-bs-toggle="modal" data-bs-target="#SessionEndModal">
-            <div data-controller="stopwatch">
-              <strong><p class="bf-stopwatch-text bf-btn-margin" data-stopwatch-target="timer">00:00</p></strong>
-            </div>
             End
           </button>
-
+          <div data-controller="stopwatch">
+           <strong><p class="bf-stopwatch-text bf-btn-margin" data-stopwatch-target="timer">00:00</p></strong>
+          </div>
 
           <div class="modal fade" id="SessionEndModal" tabindex="-1" aria-labelledby="SessionEndModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
