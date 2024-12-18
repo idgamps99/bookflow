@@ -23,6 +23,8 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   color: inherit;
   height: auto;
   padding: 16px;
+  padding-top: 26px;
+  padding-bottom: 26px;
   margin-bottom: 16px;
   margin-top: 16px;
   background-color: white;
@@ -68,26 +70,25 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 .activity-info {
   color: black;
   margin-top: 14px;
+  padding-left: 60px;
   font-size: 14px;
+  display: flex;
+  justify-content: center; /* Centers the content horizontally */
+  align-items: flex-start; /* Keeps the content aligned at the top */
 
-  .activity-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .activity-time {
-    width: 150px;
-    padding: 8px 0;
-
-    p {
-      margin: 0;
-    }
-  }
-
+  .activity-time,
   .activity-pages {
     width: 150px;
     padding: 8px 0;
-    border-top: 1px solid #666;
+
+    strong {
+      display: inline-block;
+      margin-right: 5px; /* Adds a small space between label and value */
+    }
+
+    p {
+      display: inline; /* Makes the time/pages appear on the same line */
+      margin: 0; /* Removes unnecessary spacing */
+    }
   }
 }
