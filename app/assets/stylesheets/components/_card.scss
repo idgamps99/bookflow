@@ -53,6 +53,13 @@ $linear-color: linear-gradient(90deg, #e49933, #e36f08);
   height: 300px;
 }
 
+.review-card-img {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
 .bf-progress {
   background-color: #e1e1e1;
   border-radius: 5px;
