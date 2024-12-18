@@ -9,13 +9,21 @@
       <div class="main-banner-content">
         <h1>Bookflow</h1>
         <p>Discover and Share Books</p>
-        <p><%= link_to "Log in", new_user_session_path, class: "primary-button" %></p>
+        <p><%= link_to "Log in", new_user_session_path, class: "primary-button" unless user_signed_in? %></p>
       </div>
     </div>
   </div>
 
   <div class="genres">
-    <h3><%= link_to "Genres", genres_path %></h3>
+    <div class="genres-header">
+      <h3><%= link_to "Genres", genres_path %></h3>
+      <div class="bf-link-right">
+        <%= link_to genres_path do %>
+          <i class="fa-solid fa-circle-chevron-right"></i>
+        <% end %>
+      </div>
+    </div>
+
     <div class="genre-buttons">
       <div class="genre-container">
         <%= link_to books_path(genre_query: "Fantasy"), class: "genre-button" do %>
@@ -54,7 +62,7 @@
 
       <div class="genre-container">
         <%= link_to books_path(genre_query: "Romance"), class: "genre-button" do %>
-          <%= image_tag("Discover/Romance Cover.png", alt: "Romance", class: "genre-image") %>
+          <%= image_tag("Discover/dystopian_cover.png", alt: "Romance", class: "genre-image dystopian") %>
         <% end %>
         <div class="genre-name">Dystopian</div>
       </div>
