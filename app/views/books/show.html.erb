@@ -38,12 +38,17 @@
     </div>
   <% end %>
 
-<!-- mark if book is read -->
-  <% if @reading_list&.read %>
-    <span class="badge bg-success">Read</span>
+  <!-- Mark book as read
+  <% if @reading_list %>
+    <% if @reading_list.read? %>
+      <div class="badge bg-success">Read</div>
+    <% else %>
+      <%= button_to "Mark as Read", mark_as_read_reading_list_path(@reading_list), method: :patch, class: "btn btn-primary" %>
+    <% end %>
   <% else %>
-    <%= button_to "Mark as Read", mark_as_read_reading_list_path(@reading_list), method: :patch, class: "btn btn-primary" %>
+    <%= button_to "Mark as read", create_read_book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", data: { turbo_method: :post } %>
   <% end %>
+  -->
 
 
   <p style="margin-top: 30px;"><strong>Summary:</strong></p>

@@ -41,6 +41,23 @@ class ReadingListsController < ApplicationController
     end
   end
 
+  def create_read
+    @user = current_user
+    @book = Book.find_by(key: params[:book_key])
+    @reading_list = ReadingList.new
+    @reading_list.user = @user
+    @reading_list.book = @book
+    @reading_list.read = true
+    @reading_list.active = false
+
+    if @reading_list.save
+      respond_to do |format|
+        format.html { redirect_to @book}
+        format.js   # Trigger JS response for dynamic update
+      end
+    end
+  end
+
   def deactivate
     @reading_list.active = false
     @reading_list.save
