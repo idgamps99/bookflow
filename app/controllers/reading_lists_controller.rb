@@ -4,6 +4,11 @@ class ReadingListsController < ApplicationController
   def index
     @reading_lists = ReadingList.where(active: true, user_id: current_user)
     @reading_lists_done = ReadingList.where(active: false, user_id: current_user)
+
+    # For reviews tab
+    @reviews = Review.where(user_id: current_user)
+    book_ids = @reviews.map { |review| review.book_id } # Extract all book IDs
+    @books_reviewed = Book.where(id: book_ids)
   end
 
   def show

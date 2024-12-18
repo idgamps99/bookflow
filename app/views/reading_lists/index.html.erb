@@ -23,17 +23,18 @@
     </div>
     <div class="tab-pane fade" id="pills-current" role="tabpanel" aria-labelledby="pills-current-tab">Current</div>
     <div class="tab-pane fade" id="pills-read" role="tabpanel" aria-labelledby="pills-read-tab">Read</div>
-    <div class="tab-pane fade" id="pills-reviewed" role="tabpanel" aria-labelledby="pills-reviewed-tab">Reviewed</div>
+    <div class="tab-pane fade" id="pills-reviewed" role="tabpanel" aria-labelledby="pills-reviewed-tab">
+      <%= render "reviewed" %>
+    </div>
   </div>
 </div>
 
 
-
-<div class="">
+<!-- <div class="">
   <% @reading_lists_done.each do |done| %>
     <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
   <% end %>
-</ul>
+</ul> -->
 
     <%# <ul class="nav nav-pills scroll-tabs-nav">
       <li class="scroll-nav-item">
