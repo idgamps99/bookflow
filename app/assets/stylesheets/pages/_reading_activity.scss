@@ -15,14 +15,19 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  border-radius: $card-border-radius;
-  box-shadow: $box-shadow;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   height: auto;
   padding: 16px;
-  margin: 15px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  background-color: white;
 
   // Image styling
   .activity-cover {
@@ -63,28 +68,27 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .activity-info {
-  color: #666;
+  color: black;
   margin-top: 14px;
+  padding-left: 60px;
   font-size: 14px;
+  display: flex;
+  justify-content: center; /* Centers the content horizontally */
+  align-items: flex-start; /* Keeps the content aligned at the top */
 
-  .activity-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .activity-time {
-    width: 300px;
+  .activity-time,
+  .activity-pages {
+    width: 150px;
     padding: 8px 0;
+
+    strong {
+      display: inline-block;
+      margin-right: 5px; /* Adds a small space between label and value */
+    }
 
     p {
-      margin: 0;
+      display: inline; /* Makes the time/pages appear on the same line */
+      margin: 0; /* Removes unnecessary spacing */
     }
-  }
-
-  .activity-pages {
-    width: 300px;
-    padding: 8px 0;
-    border-top: 1px solid #666;
   }
 }
