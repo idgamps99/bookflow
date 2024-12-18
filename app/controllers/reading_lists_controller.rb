@@ -1,9 +1,11 @@
 class ReadingListsController < ApplicationController
-  before_action :set_reading_list, only: [:show, :deactivate]
+  before_action :set_reading_list, only: [:show, :deactivate, :mark_as_read]
 
   def index
     @reading_lists = ReadingList.where(active: true, user_id: current_user)
     @reading_lists_done = ReadingList.where(active: false, user_id: current_user)
+    @books_read = current_user.reading_lists.where(read: true).includes(:book).map(&:book)
+
   end
 
   def show
@@ -39,6 +41,11 @@ class ReadingListsController < ApplicationController
     @reading_list.active = false
     @reading_list.save
     redirect_to reading_lists_path
+  end
+
+  def mark_as_read
+    @reading_list.update(read: true)
+    redirect_to book_path(@reading_list.book)
   end
 
   private

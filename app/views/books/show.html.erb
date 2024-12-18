@@ -21,22 +21,30 @@
     </div>
   </div>
 
-<% if current_user.reading_lists.where(book_id: @book.id, active: true).exists? %>
-  <div class="d-flex justify-content-between">
-    <%= button_to deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }, class: "book-detail-leave-review-btn" do %>
-      <i class="fa-solid fa-x"></i> Remove Book
-    <% end %>
-    <%= link_to reading_list_path(@reading_list), class: "book-detail-add-button text-decoration-none" do %>
-      <i class="fa-solid fa-play me-2"></i> Go to Tracker
-    <% end %>
-  </div>
-<% else %>
-  <div class="d-flex justify-content-center">
-    <%= button_to book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { turbo_method: :post } do %>
-      <i class="fa-solid fa-plus me-2"></i> Add to Reading List
-    <% end %>
-  </div>
-<% end %>
+  <% if current_user.reading_lists.where(book_id: @book.id, active: true).exists? %>
+    <div class="d-flex justify-content-between">
+      <%= button_to deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }, class: "book-detail-leave-review-btn" do %>
+        <i class="fa-solid fa-x"></i> Remove Book
+      <% end %>
+      <%= link_to reading_list_path(@reading_list), class: "book-detail-add-button text-decoration-none" do %>
+        <i class="fa-solid fa-play me-2"></i> Go to Tracker
+      <% end %>
+    </div>
+  <% else %>
+    <div class="d-flex justify-content-center">
+      <%= button_to book_reading_lists_path(@book), method: :post, class: "book-detail-add-button", id: "add-to-reading-list-btn", data: { turbo_method: :post } do %>
+        <i class="fa-solid fa-plus me-2"></i> Add to Reading List
+      <% end %>
+    </div>
+  <% end %>
+
+<!-- mark if book is read -->
+  <% if @reading_list&.read %>
+    <span class="badge bg-success">Read</span>
+  <% else %>
+    <%= button_to "Mark as Read", mark_as_read_reading_list_path(@reading_list), method: :patch, class: "btn btn-primary" %>
+  <% end %>
+
 
   <p style="margin-top: 30px;"><strong>Summary:</strong></p>
   <p class="book-detail-summary"><%= @book.summary %></p>

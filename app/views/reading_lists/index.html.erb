@@ -22,30 +22,9 @@
       <%= render "library_all" %>
     </div>
     <div class="tab-pane fade" id="pills-current" role="tabpanel" aria-labelledby="pills-current-tab">Current</div>
-    <div class="tab-pane fade" id="pills-read" role="tabpanel" aria-labelledby="pills-read-tab">Read</div>
+    <div class="tab-pane fade" id="pills-read" role="tabpanel" aria-labelledby="pills-read-tab">
+      <%= render "library_read", books_read: @books_read %>
+    </div>
     <div class="tab-pane fade" id="pills-reviewed" role="tabpanel" aria-labelledby="pills-reviewed-tab">Reviewed</div>
   </div>
 </div>
-
-
-
-<div class="">
-  <% @reading_lists_done.each do |done| %>
-    <li><%= done.book.title %> <%= link_to "show", reading_list_path(done) %></li>
-  <% end %>
-</ul>
-
-    <%# <ul class="nav nav-pills scroll-tabs-nav">
-      <li class="scroll-nav-item">
-        <a class="scroll-nav-link active" aria-current="page" href="#">All</a>
-      </li>
-      <li class="scroll-nav-item">
-        <a class="scroll-nav-link" href="#">Current</a>
-      </li>
-      <li class="scroll-nav-item">
-        <a class="scroll-nav-link" href="#">Read</a>
-      </li>
-      <li class="scroll-nav-item">
-        <a class="scroll-nav-link" href="#">Reviewed</a>
-      </li>
-    </ul> %>

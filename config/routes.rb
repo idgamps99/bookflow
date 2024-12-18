@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :reading_lists, only: [:index, :show] do
+    member do
+      patch :mark_as_read
+    end
     resources :trackers, only: [:new, :create]
   end
 
