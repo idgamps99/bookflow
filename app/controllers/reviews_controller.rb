@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
     if @review.save
       @book.overall_rating = update_overall_rating(@book)
       @book.save
-      redirect_to @book, notice: 'Review created.'
+      redirect_to @book # , notice: 'Review created.'
     else
       render 'books/show', status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
     if @review.update(review_params)
       @book.overall_rating = update_overall_rating(@book)
       @book.save
-      redirect_to @book, notice: 'Review updated.'
+      redirect_to @book # , notice: 'Review updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class ReviewsController < ApplicationController
     @review.destroy
     @book.overall_rating = update_overall_rating(@book)
     @book.save
-    redirect_to @book, notice: 'Review deleted.'
+    redirect_to @book # , notice: 'Review deleted.'
   end
 
   private
