@@ -66,7 +66,7 @@ class ReadingListsController < ApplicationController
 
   def mark_as_read
     @reading_list.update(read: true)
-    redirect_to book_path(@reading_list.book)
+    redirect_to trackers_path #(@reading_list.book)
   end
 
   private
