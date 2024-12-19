@@ -5,7 +5,7 @@ const application = Application.start();
 eagerLoadControllersFrom("controllers", application);
 
 // Configure Stimulus development experience
-application.register("star-rating", StarRatingController);
+// application.register("star-rating", StarRatingController);
 application.debug = false
 window.Stimulus   = application
 
