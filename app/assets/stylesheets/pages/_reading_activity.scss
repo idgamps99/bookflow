@@ -3,7 +3,7 @@ $card-border-radius: 12px;
 $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
 // Container for the cards
-.cards-container {
+.activity-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
@@ -11,38 +11,35 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
 // Card styles
 .session-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  height: auto;
-  padding: 16px;
   padding-top: 26px;
   padding-bottom: 26px;
-  margin-bottom: 16px;
-  margin-top: 16px;
-  background-color: white;
+  // text-decoration: none !important;
+  display: block;
 
-  // Image styling
+//   // Image styling
   .activity-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: auto;
     height: 200px;
     object-fit: cover;
     margin-bottom: 10px;
   }
 
-  // Text styling
+//     // Text styling
   .activity-details {
     text-align: center;
 
     .activity-title {
       font-weight: bold;
+      color: black;
     }
 
     .activity-author {
@@ -50,6 +47,12 @@ $box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       margin-top: 4px;
       color: #666;
     }
+  }
+
+  .marked-read {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
