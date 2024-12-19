@@ -1,6 +1,3 @@
-<div class="container">
-
-
   <%# <%= button_to "Remove from List", deactivate_path(@reading_list), method: :patch, data: { turbo_method: :patch, confirm: "Are you sure?" }  %>
   <div class="card p-2 text-center m-3 mx-0 bf-card">
     <div class="">
@@ -15,7 +12,7 @@
 
 
     <% if @tracker.blank? %>
-      <%= button_to "start Tracker", reading_list_trackers_path(@reading_list), method: :post, class: "book-detail-add-button" %>
+      <%= button_to "Start Tracking", reading_list_trackers_path(@reading_list), method: :post, class: "book-detail-add-button" %>
     <% else %>
 
  <!-- Progress bar -->
@@ -88,5 +85,3 @@
 
 
     <% end %>
-
-</div>
