@@ -1,5 +1,11 @@
 .scroll-tabs {
-  position: relative;
+  // position: relative;
+
+  .sticky-top {
+    position: sticky;
+    top: 10px;
+    background-color: #F4F4F4;
+  }
 
   .scroll-tabs-nav {
     display: flex;
