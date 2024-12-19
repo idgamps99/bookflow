@@ -6,13 +6,20 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :reading_lists, only: [:index, :show] do
+    member do
+      patch :mark_as_read
+    end
     resources :trackers, only: [:new, :create]
   end
 
   # Nested routes all need the key rather than the id otherwise it will crash if the book not in DB
   resources :books, param: :key, only: [:index, :show] do
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
-    resources :reading_lists, only: [:create]
+    resources :reading_lists, only: [:create] do
+      collection do
+        post :create_read
+      end
+    end
   end
 
   get "/genres", to: "books#genres_index"

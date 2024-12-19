@@ -1,0 +1,27 @@
+<div class="index-container">
+  <div class="book-section">
+    <div class="books">
+      <% if books_read.present? %>
+        <% books_read.each do |book| %>
+          <div class="book-card">
+            <% if book.cover_url.present? %>
+              <div class="book-cover-container">
+                <%= link_to book_path(book) do %>
+                  <%= image_tag book.cover_url, alt: "Book Cover", class: "book-cover" %>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="book-cover-container">
+                <%= link_to book_path(book) do %>
+                  <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No books have been marked as read yet.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,10 @@
 <div class="activity-card-container">
   <% @trackers.each do |t| %>
-    <%= link_to reading_list_path(t.reading_list), class: "session-card" do %>
-    <div class="activity-cover">
-      <%= image_tag t.reading_list.book.cover_url %>
-    </div>
+  <div class="session-card">
+    <%= link_to reading_list_path(t.reading_list), style: "text-decoration: none;" do %>
+      <div class="activity-cover">
+        <%= image_tag t.reading_list.book.cover_url %>
+      </div>
       <div class="activity-details">
         <h3 class="activity-title"><%= t.reading_list.book.title %></h3>
         <p class="activity-author" style="font-size: 17px;">by <%= t.reading_list.book.author %></p>
@@ -29,5 +30,15 @@
         </div>
       </div>
     <% end %>
+
+      <!-- Mark book as read -->
+      <div class="marked-read">
+        <% if t.reading_list.read? %>
+          <div class="badge bg-success">Read</div>
+        <% else %>
+          <%= button_to "Mark as Read", mark_as_read_reading_list_path(t.reading_list), method: :patch, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
