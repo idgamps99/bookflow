@@ -34,9 +34,11 @@
       <!-- Mark book as read -->
       <div class="marked-read">
         <% if t.reading_list.read? %>
-          <div class="badge bg-success">Read</div>
+          <div class="mark-read-btn">
+          <i class="fas fa-check" style="margin-right: 4px;"></i> Read
+          </div>
         <% else %>
-          <%= button_to "Mark as Read", mark_as_read_reading_list_path(t.reading_list), method: :patch, class: "btn btn-primary" %>
+          <%= button_to "Mark as Read", mark_as_read_reading_list_path(t.reading_list), method: :patch, class: "mark-read-btn" %>
         <% end %>
       </div>
     </div>
