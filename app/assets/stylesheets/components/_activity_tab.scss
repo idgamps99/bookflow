@@ -2,6 +2,20 @@
 .activity-top {
   padding: 15px;
 }
+
+.sticky-top {
+  position: sticky;
+  top: 42px;
+  background-color: #f4f4f4;
+  // padding-bottom: 2px;
+  padding: 2px 15px;
+  box-shadow: none;
+  width: 100vw; /* Make it span the full width of the viewport */
+  left: 0; /* Ensure it starts from the very left */
+  margin-left: -15px; /* Optional: Counteract container padding if present */
+  z-index: 10;
+}
+
 .nav-pills {
   display: flex;
   justify-content: space-between;
