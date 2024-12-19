@@ -1,9 +1,10 @@
 class ReadingListsController < ApplicationController
-  before_action :set_reading_list, only: [:show, :deactivate]
+  before_action :set_reading_list, only: [:show, :deactivate, :mark_as_read]
 
   def index
     @reading_lists = ReadingList.where(active: true, user_id: current_user)
     @reading_lists_done = ReadingList.where(active: false, user_id: current_user)
+    @books_read = current_user.reading_lists.where(read: true).includes(:book).map(&:book)
 
     # For reviews tab
     @reviews = Review.where(user_id: current_user)
@@ -40,10 +41,32 @@ class ReadingListsController < ApplicationController
     end
   end
 
+  def create_read
+    @user = current_user
+    @book = Book.find_by(key: params[:book_key])
+    @reading_list = ReadingList.new
+    @reading_list.user = @user
+    @reading_list.book = @book
+    @reading_list.read = true
+    @reading_list.active = false
+
+    if @reading_list.save
+      respond_to do |format|
+        format.html { redirect_to @book}
+        format.js   # Trigger JS response for dynamic update
+      end
+    end
+  end
+
   def deactivate
     @reading_list.active = false
     @reading_list.save
     redirect_to reading_lists_path
+  end
+
+  def mark_as_read
+    @reading_list.update(read: true)
+    redirect_to trackers_path #(@reading_list.book)
   end
 
   private
