@@ -1,0 +1,7 @@
+2024-12-19 09:22:31.071 GMT [13636] LOG:  starting PostgreSQL 14.15 (Homebrew) on x86_64-apple-darwin23.6.0, compiled by Apple clang version 16.0.0 (clang-1600.0.26.4), 64-bit
+2024-12-19 09:22:31.078 GMT [13636] LOG:  listening on IPv6 address "::1", port 5432
+2024-12-19 09:22:31.078 GMT [13636] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-12-19 09:22:31.080 GMT [13636] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-12-19 09:22:31.089 GMT [13637] LOG:  database system was shut down at 2024-12-19 09:22:12 GMT
+2024-12-19 09:22:31.098 GMT [13636] LOG:  database system is ready to accept connections
+2024-12-19 09:22:43.992 GMT [13726] FATAL:  database "bookflow_development" does not exist
