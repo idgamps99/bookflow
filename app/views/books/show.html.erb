@@ -51,8 +51,20 @@
   -->
 
 
-  <p style="margin-top: 30px;"><strong>Summary:</strong></p>
-  <p class="book-detail-summary"><%= @book.summary %></p>
+  <% if @book.summary.present? %>
+    <h4 style="margin-top: 30px;">Summary</h4>
+    <p>
+      <span class="summary-text"><%= @book.summary.truncate(300) %></span>
+      <span id="points">...</span>
+      <span id="moreText" style="display: none;"><%= @book.summary %></span>
+    </p>
+    <a href="#" onclick="toggleText()" id="textButton" style="text-decoration: none; color: black; cursor: pointer;">
+      Show More <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  <% else %>
+    <h4 style="margin-top: 30px;">Summary</h4>
+    <p>No summary available for this book.</p>
+  <% end %>
 
   <h4 style="margin-top: 30px;">Reviews</h4>
   <!-- Review Form Toggle -->
@@ -116,3 +128,23 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  function toggleText() {
+    // Get the elements
+    const points = document.getElementById("points");
+    const moreText = document.getElementById("moreText");
+    const buttonText = document.getElementById("textButton");
+
+    // Toggle visibility
+    if (points.style.display === "none") {
+      moreText.style.display = "none";
+      points.style.display = "inline";
+      buttonText.innerHTML = 'Show More <i class="fa-solid fa-chevron-down"></i>';
+    } else {
+      moreText.style.display = "inline";
+      points.style.display = "none";
+      buttonText.innerHTML = 'Show Less <i class="fa-solid fa-chevron-up"></i>';
+    }
+  }
+</script>
