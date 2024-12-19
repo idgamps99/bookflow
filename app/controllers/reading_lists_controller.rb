@@ -27,7 +27,7 @@ class ReadingListsController < ApplicationController
 
     if @reading_list.save
       respond_to do |format|
-        format.html { redirect_to @book}
+        format.html { redirect_to book_path(@book) }
         format.js   # Trigger JS response for dynamic update
       end
     else
