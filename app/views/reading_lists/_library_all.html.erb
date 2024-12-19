@@ -1,27 +1,23 @@
-<div class="index-container">
-  <div class="book-section">
-    <% if @reading_lists.empty? %>
-      <p>There are no Books yet.</p>
-    <% else %>
-      <div class="books">
-        <% @reading_lists.each do |reading_list| %>
-          <div class="book-card">
-            <% if reading_list.book.cover_url.present? %>
-              <div class="book-cover-container">
-                <%= link_to book_path(reading_list.book) do %>
-                  <%= image_tag reading_list.book.cover_url, alt: "Book Cover", class: "book-cover" %>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="book-cover-container">
-                <%= link_to book_path(reading_list.book) do %>
-                  <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-</div>
+  <% if @reading_lists.empty? %>
+    <p>There are no Books yet.</p>
+  <% else %>
+    <div class="books">
+      <% @reading_lists.each do |reading_list| %>
+        <div class="book-card">
+          <% if reading_list.book.cover_url.present? %>
+            <div class="book-cover-container">
+              <%= link_to book_path(reading_list.book) do %>
+                <%= image_tag reading_list.book.cover_url, alt: "Book Cover", class: "book-cover" %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="book-cover-container">
+              <%= link_to book_path(reading_list.book) do %>
+                <%= image_tag 'Discover/missingbook.jpeg', alt: 'No Cover', class: 'book-cover' %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
