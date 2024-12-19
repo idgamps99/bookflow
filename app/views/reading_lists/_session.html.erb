@@ -1,4 +1,4 @@
- <% @reading_sessions_done.each do |ses| %>
+<% @reading_sessions_done.sort_by { |ses| -ses.session_start.to_i }.each do |ses| %>
   <div class="session-card bf-session-card">
     <div class="bf-session-info">Duration: <%= (ses.duration / 3600).to_i %> Hrs <%= (ses.duration % 3600 / 60).to_i %> Min <%= (ses.duration % 60).to_i %> Sec</div class="bf-session-info">
     <div class="bf-session-info">Page Milestone<br><%= ses.page_count %></div class="bf-session-info">
