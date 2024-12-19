@@ -4,4 +4,8 @@ class ReadingList < ApplicationRecord
   has_one :tracker, dependent: :destroy
 
   validates :book, uniqueness: { scope: :user }
+
+  def read?
+    read
+  end
 end
