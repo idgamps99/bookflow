@@ -1,0 +1,4 @@
+meta_product_name: "Bookflow"
+meta_title: "Bookflow - Share and Discover Books!"
+meta_description: "Mobile application designed to help book lovers find new books and track their reading progress"
+meta_image: "apps/assets/images/cover.png" # should exist in `app/assets/images/`
